@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using VideoToSM.Enums;
 using VideoToSM.Notes;
 
@@ -14,12 +15,16 @@ namespace VideoToSM.Chart
     {
         public Chart Chart { get; set; } = new();
 
-        public void ColorToNote(SKColor color, int colNum)
+        public void ColorsToNote(List<SKColor> colors, int colNum)
         {
-            ENoteTiming? noteTiming = ColorToENoteTiming(color);
-            if (noteTiming != null)
+            foreach (var color in colors)
             {
-                Chart.AddNote(new Note(noteTiming.Value), colNum);
+                ENoteTiming? noteTiming = ColorToENoteTiming(color);
+                if (noteTiming != null)
+                {
+                    Chart.AddNote(new Note(noteTiming.Value), colNum);
+                    break;
+                }
             }
         }
 
@@ -35,10 +40,10 @@ namespace VideoToSM.Chart
             {
                 return ENoteTiming.Red;
             }
-            else if (IsColorInRange(color, KnownColor.Blue, blueMin, blueMax))
-            {
-                return ENoteTiming.Blue;
-            }
+            //else if (IsColorInRange(color, KnownColor.Blue, blueMin, blueMax))
+            //{
+            //    return ENoteTiming.Blue;
+            //}
             else
             {
                 return null;

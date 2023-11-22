@@ -27,9 +27,29 @@ namespace VideoToSM
             FlowDocument.Blocks.Add(Paragraphs[0]);
         }
 
+        public void WriteLine()
+        {
+            Write("\n");
+        }
+
+        public void WriteLine(int text, SKColor? color = null)
+        {
+            WriteLine(text.ToString(), color);
+        }
+
         public void WriteLine(string text, SKColor? color = null)
         {
-            Run run = new(text + "\n\r");
+            Write(text + "\n", color);
+        }
+
+        public void Write(int text, SKColor? color = null)
+        {
+            Write(text.ToString(), color);
+        }
+
+        public void Write(string text, SKColor? color = null)
+        {
+            Run run = new(text);
 
             if (color != null)
             {

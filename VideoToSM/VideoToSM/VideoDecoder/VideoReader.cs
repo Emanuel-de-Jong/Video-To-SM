@@ -2,6 +2,7 @@
 using FFmpeg.AutoGen.Bindings.DynamicallyLoaded;
 using SkiaSharp;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using VideoToSM.Chart;
@@ -38,17 +39,36 @@ namespace VideoToSM.VideoDecoder
                 using var bitmap = new SKBitmap();
                 bitmap.InstallPixels(imageInfo, (IntPtr)convertedFrame.data[0]);
 
-                var pixel = bitmap.GetPixel(266, 214);
-
-                G.TextBoxHelper.WriteLine("Frame " + frameNum, pixel);
-
-                if (frameNum == 74)
-                {
-                    var test = 0;
-                }
-
-                ChartBuilder.ColorToNote(pixel, 0);
+                FindNotesInFrame(bitmap, frameNum);
             }
+        }
+
+        private void FindNotesInFrame(SKBitmap bitmap, int frameNum)
+        {
+            string[] arrowSymbols = { "◄", "▼", "◆", "▲", "►" };
+            int[] xCoords = { 190, 258, 320, 375, 450 };
+
+            G.TextBoxHelper.Write(frameNum);
+
+            for (int i = 0; i < xCoords.Length; i++)
+            {
+                int x = xCoords[i];
+                int yBase = 370;
+
+                var pixelUp = bitmap.GetPixel(x, yBase - 10);
+                var pixelMid = bitmap.GetPixel(x, yBase);
+                var pixelDown = bitmap.GetPixel(x, yBase + 10);
+
+                string arrowSymbol = arrowSymbols[i];
+                G.TextBoxHelper.Write(" ");
+                G.TextBoxHelper.Write(arrowSymbol, pixelUp);
+                G.TextBoxHelper.Write(arrowSymbol, pixelMid);
+                G.TextBoxHelper.Write(arrowSymbol, pixelDown);
+
+                ChartBuilder.ColorsToNote((new SKColor[] { pixelUp, pixelMid, pixelDown }).ToList(), i);
+            }
+
+            G.TextBoxHelper.WriteLine();
         }
     }
 }
