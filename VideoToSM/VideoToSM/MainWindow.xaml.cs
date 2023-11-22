@@ -22,6 +22,7 @@ namespace VideoToSM
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
                 G.VideoReader.Read(files[0]);
+                G.SimfileGen.Generate();
             }
         }
 

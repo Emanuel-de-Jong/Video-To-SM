@@ -11,8 +11,6 @@ namespace VideoToSM.VideoDecoder
 {
     public class VideoReader
     {
-        public ChartBuilder ChartBuilder { get; set; } = new();
-
         public VideoReader()
         {
             DynamicallyLoadedBindings.LibrariesPath = Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.Length - 24) + "ffmpeg";
@@ -67,7 +65,7 @@ namespace VideoToSM.VideoDecoder
                 if (shouldWrite) G.TextBoxHelper.Write(arrowSymbol, pixelMid);
                 if (shouldWrite) G.TextBoxHelper.Write(arrowSymbol, pixelDown);
 
-                ChartBuilder.ColorsToNote((new SKColor[] { pixelUp, pixelMid, pixelDown }).ToList(), i, frameNum);
+                G.ChartBuilder.ColorsToNote((new SKColor[] { pixelUp, pixelMid, pixelDown }).ToList(), i, frameNum);
             }
 
             if (shouldWrite) G.TextBoxHelper.WriteLine();

@@ -10,7 +10,7 @@ namespace VideoToSM.Chart
 {
     public class ChartCol
     {
-        public List<Note> Notes { get; set; } = new();
+        public Dictionary<int, Note> Notes { get; set; } = new();
         public ENoteTiming? LastNoteTiming { get; set; }
         public int? LastNoteFrameNum { get; set; }
     }

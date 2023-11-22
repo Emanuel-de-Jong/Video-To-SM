@@ -40,8 +40,7 @@ namespace VideoToSM.Chart
 
             Note note = new();
             note.NoteTiming = noteTiming.Value;
-            note.CalcB64thOrderNumber(frameNum);
-            Chart.AddNote(note, colNum);
+            Chart.AddNote(note, colNum, frameNum);
         }
 
         private ENoteTiming? ColorToENoteTiming(SKColor color)

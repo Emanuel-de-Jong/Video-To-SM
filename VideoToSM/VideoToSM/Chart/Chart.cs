@@ -11,6 +11,7 @@ namespace VideoToSM.Chart
     public class Chart
     {
         public List<ChartCol> Columns { get; set; } = new();
+        public int LastB64thOrderNumber { get; set; }
 
         public Chart()
         {
@@ -21,9 +22,20 @@ namespace VideoToSM.Chart
             Columns.Add(new ChartCol());
         }
 
-        public void AddNote(Note note, int colNum)
+        public void AddNote(Note note, int colNum, int frameNum)
         {
-            Columns[colNum].Notes.Add(note);
+            LastB64thOrderNumber = CalcB64thOrderNumber(frameNum);
+
+            Columns[colNum].Notes[LastB64thOrderNumber] = note;
+        }
+
+        public int CalcB64thOrderNumber(int frameNum)
+        {
+            double msPerFrame = 1000 / G.FPS;
+            double ms = frameNum * msPerFrame;
+            double b64thBPM = G.BPM * 2 * 2 * 2 * 2;
+            double b64thBeatsPerMS = b64thBPM / 60 / 1000;
+            return (int)(ms * b64thBeatsPerMS);
         }
     }
 }

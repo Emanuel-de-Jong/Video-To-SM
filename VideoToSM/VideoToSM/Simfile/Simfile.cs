@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VideoToSM.Enums;
 
-namespace VideoToSM.Notes
+namespace VideoToSM.Simfile
 {
-    public class Note
+    public class Simfile
     {
-        public ENoteTiming NoteTiming { get; set; }
+        public string Notes { get; set; }
     }
 }
