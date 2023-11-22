@@ -36,6 +36,16 @@ public sealed unsafe class VideoStreamDecoder : IDisposable
 
         _pPacket = ffmpeg.av_packet_alloc();
         _pFrame = ffmpeg.av_frame_alloc();
+
+        for (var i = 0; i < pFormatContext->nb_streams; i++)
+        {
+            if (pFormatContext->streams[i]->codecpar->codec_type == AVMediaType.AVMEDIA_TYPE_VIDEO)
+            {
+                AVRational* videoStream = &pFormatContext->streams[i]->avg_frame_rate;
+                G.FPS = ffmpeg.av_q2d(*videoStream);
+                break;
+            }
+        }
     }
 
 

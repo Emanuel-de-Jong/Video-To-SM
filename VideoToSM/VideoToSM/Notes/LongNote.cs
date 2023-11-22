@@ -9,7 +9,7 @@ namespace VideoToSM.Notes
 {
     public class LongNote : Note
     {
-        public decimal Length { get; set; }
+        public double Length { get; set; }
 
         public LongNote(ENoteTiming noteTiming) : base(noteTiming)
         {
