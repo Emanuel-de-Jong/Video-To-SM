@@ -8,22 +8,21 @@ namespace VideoToSM
     public partial class MainWindow : Window
     {
         public VideoReader VideoReader { get; set; }
+        public TextBoxHelper TextBoxHelper { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
 
-            VideoReader.MainLabel = MainLabel;
-            VideoReader = new();
+            TextBoxHelper = new(MainRichTextBox);
+            VideoReader = new(TextBoxHelper);
         }
 
-        private void MainGrid_Drop(object sender, DragEventArgs e)
+        private void Window_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-
-                MainLabel.Content = files[0];
 
                 VideoReader.Read(files[0]);
             }

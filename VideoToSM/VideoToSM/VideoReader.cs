@@ -2,16 +2,19 @@
 using FFmpeg.AutoGen.Bindings.DynamicallyLoaded;
 using SkiaSharp;
 using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace VideoToSM
 {
     public class VideoReader
     {
-        public static Label? MainLabel;
+        public TextBoxHelper TextBoxHelper { get; set; }
 
-        public VideoReader()
+        public VideoReader(TextBoxHelper textBoxHelper)
         {
+            TextBoxHelper = textBoxHelper;
+
             DynamicallyLoadedBindings.LibrariesPath = Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.Length - 24) + "ffmpeg";
             DynamicallyLoadedBindings.Initialize();
         }
@@ -33,9 +36,9 @@ namespace VideoToSM
                 using var bitmap = new SKBitmap();
                 bitmap.InstallPixels(imageInfo, (IntPtr)convertedFrame.data[0]);
 
-                var pixel = bitmap.GetPixel(5, 5);
+                var pixel = bitmap.GetPixel(80, 80);
 
-                MainLabel.Content = pixel;
+                TextBoxHelper.WriteLine(pixel.ToString(), pixel);
             }
         }
     }

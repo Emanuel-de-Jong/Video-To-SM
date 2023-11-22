@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VideoToSM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Name="MainGrid" AllowDrop="True" Drop="MainGrid_Drop">
-        <Label Name="MainLabel" />
+        Title="MainWindow" Height="500" Width="800"
+        AllowDrop="True" Drop="Window_Drop">
+    <Grid Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="50" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <RichTextBox Name="MainRichTextBox" Grid.Column="1" Grid.Row="1">
+            <!--<FlowDocument>
+                <Paragraph>
+                    <Run Text="asd" Foreground="#FFA91C1C"/>
+                </Paragraph>
+            </FlowDocument>-->
+        </RichTextBox>
     </Grid>
 </Window>
