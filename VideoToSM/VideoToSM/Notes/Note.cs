@@ -9,12 +9,16 @@ namespace VideoToSM.Notes
 {
     public class Note
     {
-        public ENoteTiming noteTiming { get; set; }
-        public int Beat { get; set; }
+        public ENoteTiming NoteTiming { get; set; }
+        public int B64thOrderNumber { get; set; }
 
-        public Note(ENoteTiming noteTiming)
+        public void CalcB64thOrderNumber(int frameNum)
         {
-            this.noteTiming = noteTiming;
+            double msPerFrame = 1000 / G.FPS;
+            double ms = frameNum * msPerFrame;
+            double b64thBPM = G.BPM * 2 * 2 * 2 * 2;
+            double b64thBeatsPerMS = b64thBPM / 60 / 1000;
+            B64thOrderNumber = (int) (ms * b64thBeatsPerMS);
         }
     }
 }

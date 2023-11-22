@@ -10,10 +10,5 @@ namespace VideoToSM.Notes
     public class VibroNote : LongNote
     {
         public int TimesToStep { get; set; }
-
-        public VibroNote(ENoteTiming noteTiming) : base(noteTiming)
-        {
-
-        }
     }
 }

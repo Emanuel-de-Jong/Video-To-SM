@@ -10,10 +10,5 @@ namespace VideoToSM.Notes
     public class LongNote : Note
     {
         public double Length { get; set; }
-
-        public LongNote(ENoteTiming noteTiming) : base(noteTiming)
-        {
-
-        }
     }
 }

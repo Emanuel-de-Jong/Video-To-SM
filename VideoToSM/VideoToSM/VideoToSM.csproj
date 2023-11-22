@@ -14,4 +14,8 @@
     <PackageReference Include="SkiaSharp" Version="2.88.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Simfile\" />
+  </ItemGroup>
+
 </Project>

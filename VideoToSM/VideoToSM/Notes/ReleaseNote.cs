@@ -9,9 +9,5 @@ namespace VideoToSM.Notes
 {
     public class ReleaseNote : LongNote
     {
-        public ReleaseNote(ENoteTiming noteTiming) : base(noteTiming)
-        {
-
-        }
     }
 }

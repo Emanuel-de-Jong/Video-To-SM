@@ -9,9 +9,5 @@ namespace VideoToSM.Notes
 {
     public class Mine : Note
     {
-        public Mine(ENoteTiming noteTiming) : base(noteTiming)
-        {
-
-        }
     }
 }

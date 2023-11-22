@@ -9,7 +9,7 @@ namespace VideoToSM
 {
     public static class G
     {
-        public static int BPM { get; set; }
+        public static int BPM { get; set; } = 146;
         public static double FPS { get; set; }
         public static VideoReader VideoReader { get; set; } = new();
         public static TextBoxHelper? TextBoxHelper { get; set; }

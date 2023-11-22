@@ -45,10 +45,12 @@ namespace VideoToSM.VideoDecoder
 
         private void FindNotesInFrame(SKBitmap bitmap, int frameNum)
         {
+            bool shouldWrite = false;
+
             string[] arrowSymbols = { "◄", "▼", "◆", "▲", "►" };
             int[] xCoords = { 190, 258, 320, 375, 450 };
 
-            G.TextBoxHelper.Write(frameNum);
+            if (shouldWrite) G.TextBoxHelper.Write(frameNum);
 
             for (int i = 0; i < xCoords.Length; i++)
             {
@@ -60,15 +62,15 @@ namespace VideoToSM.VideoDecoder
                 var pixelDown = bitmap.GetPixel(x, yBase + 10);
 
                 string arrowSymbol = arrowSymbols[i];
-                G.TextBoxHelper.Write(" ");
-                G.TextBoxHelper.Write(arrowSymbol, pixelUp);
-                G.TextBoxHelper.Write(arrowSymbol, pixelMid);
-                G.TextBoxHelper.Write(arrowSymbol, pixelDown);
+                if (shouldWrite) G.TextBoxHelper.Write(" ");
+                if (shouldWrite) G.TextBoxHelper.Write(arrowSymbol, pixelUp);
+                if (shouldWrite) G.TextBoxHelper.Write(arrowSymbol, pixelMid);
+                if (shouldWrite) G.TextBoxHelper.Write(arrowSymbol, pixelDown);
 
                 ChartBuilder.ColorsToNote((new SKColor[] { pixelUp, pixelMid, pixelDown }).ToList(), i, frameNum);
             }
 
-            G.TextBoxHelper.WriteLine();
+            if (shouldWrite) G.TextBoxHelper.WriteLine();
         }
     }
 }
