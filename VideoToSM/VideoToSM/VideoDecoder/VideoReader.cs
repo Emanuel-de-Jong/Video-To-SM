@@ -65,7 +65,7 @@ namespace VideoToSM.VideoDecoder
                 G.TextBoxHelper.Write(arrowSymbol, pixelMid);
                 G.TextBoxHelper.Write(arrowSymbol, pixelDown);
 
-                ChartBuilder.ColorsToNote((new SKColor[] { pixelUp, pixelMid, pixelDown }).ToList(), i);
+                ChartBuilder.ColorsToNote((new SKColor[] { pixelUp, pixelMid, pixelDown }).ToList(), i, frameNum);
             }
 
             G.TextBoxHelper.WriteLine();

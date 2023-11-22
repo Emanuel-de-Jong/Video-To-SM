@@ -15,17 +15,30 @@ namespace VideoToSM.Chart
     {
         public Chart Chart { get; set; } = new();
 
-        public void ColorsToNote(List<SKColor> colors, int colNum)
+        public void ColorsToNote(List<SKColor> colors, int colNum, int frameNum)
         {
+            int framesInPause = (int) Math.Round(3 * (G.FPS / 30));
+
+            ENoteTiming? noteTiming = null;
             foreach (var color in colors)
             {
-                ENoteTiming? noteTiming = ColorToENoteTiming(color);
+                noteTiming = ColorToENoteTiming(color);
                 if (noteTiming != null)
-                {
-                    Chart.AddNote(new Note(noteTiming.Value), colNum);
                     break;
-                }
             }
+
+            if (noteTiming == null)
+                return;
+
+            ChartCol col = Chart.Columns[colNum];
+            if (col.LastNoteTiming != null && noteTiming == col.LastNoteTiming &&
+                col.LastNoteFrameNum != null && frameNum - col.LastNoteFrameNum <= framesInPause)
+                return;
+
+            col.LastNoteTiming = noteTiming;
+            col.LastNoteFrameNum = frameNum;
+
+            Chart.AddNote(new Note(noteTiming.Value), colNum);
         }
 
         private ENoteTiming? ColorToENoteTiming(SKColor color)
