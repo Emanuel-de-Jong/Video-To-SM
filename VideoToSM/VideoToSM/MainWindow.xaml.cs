@@ -8,6 +8,8 @@ namespace VideoToSM
     /// </summary>
     public partial class MainWindow : Window
     {
+        public int BPM { get; set; }
+
         public VideoReader VideoReader { get; set; }
         public TextBoxHelper TextBoxHelper { get; set; }
 
@@ -26,6 +28,14 @@ namespace VideoToSM
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
                 VideoReader.Read(files[0]);
+            }
+        }
+
+        private void BPMTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (int.TryParse(BPMTextBox.Text, out int newBPM))
+            {
+                BPM = newBPM;
             }
         }
     }

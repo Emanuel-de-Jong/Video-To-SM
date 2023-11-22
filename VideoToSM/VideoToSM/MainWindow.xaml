@@ -19,6 +19,8 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
+        <TextBox Name="BPMTextBox" Grid.Column="1" Grid.Row="0" TextChanged="BPMTextBox_TextChanged" />
+
         <RichTextBox Name="MainRichTextBox" Grid.Column="1" Grid.Row="1">
             <!--<FlowDocument>
                 <Paragraph>
