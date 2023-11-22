@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VideoToSM.Notes;
 
 namespace VideoToSM.Chart
 {
@@ -17,6 +18,11 @@ namespace VideoToSM.Chart
             Columns.Add(new ChartCol());
             Columns.Add(new ChartCol());
             Columns.Add(new ChartCol());
+        }
+
+        public void AddNote(Note note, int colNum)
+        {
+            Columns[colNum].Notes.Add(note);
         }
     }
 }

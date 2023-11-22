@@ -4,12 +4,14 @@ using SkiaSharp;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using VideoToSM.Chart;
 
 namespace VideoToSM.VideoDecoder
 {
     public class VideoReader
     {
         public TextBoxHelper TextBoxHelper { get; set; }
+        public ChartBuilder ChartBuilder { get; set; } = new();
 
         public VideoReader(TextBoxHelper textBoxHelper)
         {
@@ -39,6 +41,8 @@ namespace VideoToSM.VideoDecoder
                 var pixel = bitmap.GetPixel(80, 80);
 
                 TextBoxHelper.WriteLine(pixel.ToString(), pixel);
+
+                ChartBuilder.ColorToNote(pixel, 0);
             }
         }
     }

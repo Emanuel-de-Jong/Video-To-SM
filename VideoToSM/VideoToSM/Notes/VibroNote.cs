@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VideoToSM.Enums;
 
 namespace VideoToSM.Notes
 {
     public class VibroNote : LongNote
     {
         public int TimesToStep { get; set; }
+
+        public VibroNote(ENoteTiming noteTiming) : base(noteTiming)
+        {
+
+        }
     }
 }
