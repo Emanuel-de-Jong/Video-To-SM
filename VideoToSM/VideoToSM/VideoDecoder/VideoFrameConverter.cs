@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using FFmpeg.AutoGen.Abstractions;
 
-namespace VideoToSM;
+namespace VideoToSM.VideoDecoder;
 
 public sealed unsafe class VideoFrameConverter : IDisposable
 {
