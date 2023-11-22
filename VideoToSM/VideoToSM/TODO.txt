@@ -1,0 +1,9 @@
+﻿Begin first note as 1/4th
+Look at ENoteTiming for more precise possition
+Support LongNotes
+Support ReleaseNotes
+Support Mines
+Support VibroNotes
+Support multiple BPM
+Export to scc
+Async
