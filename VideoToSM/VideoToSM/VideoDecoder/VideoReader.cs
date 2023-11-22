@@ -31,16 +31,24 @@ namespace VideoToSM.VideoDecoder
             var destinationPixelFormat = AVPixelFormat.@AV_PIX_FMT_BGRA;
             using var vfc = new VideoFrameConverter(sourceSize, sourcePixelFormat, destinationSize, destinationPixelFormat);
 
+            int frameNum = 0;
             while (vsd.TryDecodeNextFrame(out var frame))
             {
+                frameNum++;
+
                 var convertedFrame = vfc.Convert(frame);
                 var imageInfo = new SKImageInfo(convertedFrame.width, convertedFrame.height, SKColorType.Bgra8888, SKAlphaType.Opaque);
                 using var bitmap = new SKBitmap();
                 bitmap.InstallPixels(imageInfo, (IntPtr)convertedFrame.data[0]);
 
-                var pixel = bitmap.GetPixel(80, 80);
+                var pixel = bitmap.GetPixel(266, 214);
 
-                TextBoxHelper.WriteLine(pixel.ToString(), pixel);
+                TextBoxHelper.WriteLine("Frame " + frameNum, pixel);
+
+                if (frameNum == 74)
+                {
+                    var test = 0;
+                }
 
                 ChartBuilder.ColorToNote(pixel, 0);
             }
