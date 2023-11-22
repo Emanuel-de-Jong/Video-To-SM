@@ -10,7 +10,7 @@ namespace VideoToSM.Notes
     public class Note
     {
         public ENoteTiming noteTiming { get; set; }
-        public decimal Time { get; set; }
+        public int Beat { get; set; }
 
         public Note(ENoteTiming noteTiming)
         {

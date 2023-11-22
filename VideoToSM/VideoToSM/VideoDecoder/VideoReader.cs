@@ -10,13 +10,10 @@ namespace VideoToSM.VideoDecoder
 {
     public class VideoReader
     {
-        public TextBoxHelper TextBoxHelper { get; set; }
         public ChartBuilder ChartBuilder { get; set; } = new();
 
-        public VideoReader(TextBoxHelper textBoxHelper)
+        public VideoReader()
         {
-            TextBoxHelper = textBoxHelper;
-
             DynamicallyLoadedBindings.LibrariesPath = Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.Length - 24) + "ffmpeg";
             DynamicallyLoadedBindings.Initialize();
         }
@@ -43,7 +40,7 @@ namespace VideoToSM.VideoDecoder
 
                 var pixel = bitmap.GetPixel(266, 214);
 
-                TextBoxHelper.WriteLine("Frame " + frameNum, pixel);
+                G.TextBoxHelper.WriteLine("Frame " + frameNum, pixel);
 
                 if (frameNum == 74)
                 {
