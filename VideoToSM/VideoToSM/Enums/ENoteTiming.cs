@@ -8,9 +8,9 @@ namespace VideoToSM.Enums
 {
     public enum ENoteTiming
     {
-        Red,
-        Blue,
-        Yellow,
-        Pink,
+        Red = 4,
+        Blue = 8,
+        Yellow = 16,
+        Pink = 32,
     }
 }
