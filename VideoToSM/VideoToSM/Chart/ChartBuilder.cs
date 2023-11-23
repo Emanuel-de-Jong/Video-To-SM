@@ -20,50 +20,59 @@ namespace VideoToSM.Chart
         {
             int framesInPause = (int)Math.Round(3 * (G.FPS / 30));
 
+            Note? note = FindNote(noteColorGroup);
+            if (note != null)
+            {
+                ChartCol col = Chart.Columns[colNum];
+                if (col.LastNoteTiming != null && note.NoteTiming == col.LastNoteTiming &&
+                    col.LastNoteFrameNum != null && frameNum - col.LastNoteFrameNum <= framesInPause)
+                    return;
+
+                col.LastNoteTiming = note.NoteTiming;
+                col.LastNoteFrameNum = frameNum;
+
+                Chart.AddNote(note, colNum, frameNum);
+                return;
+            }
+
+            bool isLN = FindLN(noteColorGroup);
+            if (isLN)
+            {
+
+            }
+        }
+
+        private Note? FindNote(NoteColorGroup noteColorGroup)
+        {
             ENoteTiming? noteTiming = null;
             foreach (var color in new SKColor[] { noteColorGroup.CenterTop, noteColorGroup.CenterCenter, noteColorGroup.CenterBottom })
             {
-                noteTiming = ColorToENoteTiming(color, frameNum);
+                noteTiming = FindNoteTiming(color);
                 if (noteTiming != null)
                     break;
             }
 
             if (noteTiming == null)
-                return;
-
-            ChartCol col = Chart.Columns[colNum];
-            if (col.LastNoteTiming != null && noteTiming == col.LastNoteTiming &&
-                col.LastNoteFrameNum != null && frameNum - col.LastNoteFrameNum <= framesInPause)
-                return;
-
-            col.LastNoteTiming = noteTiming;
-            col.LastNoteFrameNum = frameNum;
+                return null;
 
             ShortNote note = new();
             note.NoteTiming = noteTiming.Value;
-            Chart.AddNote(note, colNum, frameNum);
+            return note;
         }
 
-        private ENoteTiming? ColorToENoteTiming(SKColor color, int frameNum)
+        private ENoteTiming? FindNoteTiming(SKColor color)
         {
-            SKColor lnMin = new(109, 100, 102); // 109, 100, 102
-            SKColor lnMax = new(131, 126, 131); // 131, 126, 131
+            SKColor redMinColor = new(181, 26, 10); // 186, 31, 15
+            SKColor redMaxColor = new(195, 106, 88); // 190, 101, 83
 
-            SKColor redMin = new(181, 26, 10); // 186, 31, 15
-            SKColor redMax = new(195, 106, 88); // 190, 101, 83
+            SKColor blueMinColor = new(4, 64, 159); // 9, 69, 164
+            SKColor blueMaxColor = new(74, 103, 151); // 69, 98, 146
 
-            SKColor blueMin = new(4, 64, 159); // 9, 69, 164
-            SKColor blueMax = new(74, 103, 151); // 69, 98, 146
-
-            if (IsColorInRange(color, KnownColor.Red, redMin, redMax))
+            if (IsColorInRange(color, KnownColor.Red, redMinColor, redMaxColor))
             {
                 return ENoteTiming.Red;
             }
             //else if (IsColorInRange(color, KnownColor.Blue, blueMin, blueMax))
-            //{
-            //    return ENoteTiming.Blue;
-            //}
-            //else if (IsLNInRange(color, lnMin, lnMax))
             //{
             //    return ENoteTiming.Blue;
             //}
@@ -73,25 +82,9 @@ namespace VideoToSM.Chart
             }
         }
 
-        private bool IsLNInRange(SKColor color, SKColor minColor, SKColor maxColor)
-        {
-            if (color.Red < minColor.Red || color.Red >  maxColor.Red ||
-                color.Green < minColor.Green || color.Green > maxColor.Green ||
-                color.Blue < minColor.Blue || color.Blue > maxColor.Blue)
-                return false;
-
-            int DIFF_TRESHOLD = 10;
-            if (Math.Abs(color.Red - color.Green) > DIFF_TRESHOLD ||
-                Math.Abs(color.Red - color.Blue) > DIFF_TRESHOLD ||
-                Math.Abs(color.Green - color.Blue) > DIFF_TRESHOLD)
-                return false;
-
-            return true;
-        }
-
         private bool IsColorInRange(SKColor color, KnownColor mainColor, SKColor minColor, SKColor maxColor)
         {
-            switch(mainColor)
+            switch (mainColor)
             {
                 case KnownColor.Red:
                     if (color.Red < minColor.Red)
@@ -120,6 +113,44 @@ namespace VideoToSM.Chart
                 return true;
 
             return false;
+        }
+
+        private bool FindLN(NoteColorGroup noteColorGroup)
+        {
+            return
+                FindLNRow(noteColorGroup.LNLeftTop, noteColorGroup.CenterTop, noteColorGroup.LNRightTop) ||
+                FindLNRow(noteColorGroup.LNLeftCenter, noteColorGroup.CenterCenter, noteColorGroup.LNRightCenter) ||
+                FindLNRow(noteColorGroup.LNLeftBottom, noteColorGroup.CenterBottom, noteColorGroup.LNRightBottom);
+        }
+
+        private bool FindLNRow(SKColor leftColor, SKColor centerColor, SKColor rightColor)
+        {
+            SKColor centerMinColor = new(104, 95, 97); // 109, 100, 102
+            SKColor centerMaxColor = new(136, 131, 136); // 131, 126, 131
+
+            SKColor sideMinColor = new(50, 40, 47); // 55, 45, 52
+            SKColor sideMaxColor = new(74, 64, 71); // 69, 59, 66
+
+            return
+                IsLNInRange(leftColor, sideMinColor, sideMaxColor) &&
+                IsLNInRange(centerColor, centerMinColor, centerMaxColor) &&
+                IsLNInRange(rightColor, sideMinColor, sideMaxColor);
+        }
+
+        private bool IsLNInRange(SKColor color, SKColor minColor, SKColor maxColor)
+        {
+            if (color.Red < minColor.Red || color.Red > maxColor.Red ||
+                color.Green < minColor.Green || color.Green > maxColor.Green ||
+                color.Blue < minColor.Blue || color.Blue > maxColor.Blue)
+                return false;
+
+            int DIFF_TRESHOLD = 10;
+            if (Math.Abs(color.Red - color.Green) > DIFF_TRESHOLD ||
+                Math.Abs(color.Red - color.Blue) > DIFF_TRESHOLD ||
+                Math.Abs(color.Green - color.Blue) > DIFF_TRESHOLD)
+                return false;
+
+            return true;
         }
     }
 }

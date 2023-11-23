@@ -47,7 +47,7 @@ namespace VideoToSM.VideoDecoder
 
             string[] arrowSymbols = { "◄", "▼", "◆", "▲", "►" };
             NoteCoordGroup[] noteCoordGroups = {
-                new(185, 205, 221),
+                new(189, 205, 219),
                 new(264, 264, 264),
                 new(316, 316, 316),
                 new(366, 366, 366),
