@@ -50,7 +50,7 @@ namespace VideoToSM.Chart
 
             int closestStep = 0;
             int closestStepDiff = int.MaxValue;
-            for (int i = 1; i < (int)note.NoteTiming; i++)
+            for (int i = note.NoteTiming == ENoteTiming.Red ? 0 : 1; i < (int)note.NoteTiming + 1; i++)
             {
                 int step = i * timingStepSize;
                 int stepDiff = Math.Abs(step - beatRemainder);
