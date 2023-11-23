@@ -1,5 +1,8 @@
-﻿Begin first note as 1/4th
-Look at ENoteTiming for more precise possition
+﻿BUGS
+
+
+FEATURES
+Look at ENoteTiming for more precise position
 	Modulo assumed 64th beat (plus x times FPS to get middle of image) on ENoteTiming number (Blue = 8)
 Support LongNotes
 Support ReleaseNotes

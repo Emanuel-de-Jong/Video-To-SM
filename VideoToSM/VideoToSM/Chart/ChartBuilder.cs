@@ -17,7 +17,7 @@ namespace VideoToSM.Chart
 
         public void ColorsToNote(List<SKColor> colors, int colNum, int frameNum)
         {
-            int framesInPause = (int) Math.Round(3 * (G.FPS / 30));
+            int framesInPause = (int)Math.Round(3 * (G.FPS / 30));
 
             ENoteTiming? noteTiming = null;
             foreach (var color in colors)

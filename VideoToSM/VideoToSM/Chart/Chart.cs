@@ -31,19 +31,38 @@ namespace VideoToSM.Chart
                 LastB64thOrderNumber = 1;
             } else
             {
-                LastB64thOrderNumber = CalcB64thOrderNumber(frameNum);
+                LastB64thOrderNumber = CalcB64thOrderNumber(note, frameNum);
             }
 
             Columns[colNum].Notes[LastB64thOrderNumber] = note;
         }
 
-        public int CalcB64thOrderNumber(int frameNum)
+        public int CalcB64thOrderNumber(Note note, int frameNum)
         {
             double msPerFrame = 1000 / G.FPS;
             double ms = (frameNum - FirstNoteFrame.Value) * msPerFrame;
             double b64thBPM = G.BPM * 2 * 2 * 2 * 2;
             double b64thBeatsPerMS = b64thBPM / 60 / 1000;
-            return (int)(ms * b64thBeatsPerMS);
+            int b64thBeat = (int)(ms * b64thBeatsPerMS);
+
+            int timingStepSize = 64 / (int)note.NoteTiming;
+            int beatRemainder = b64thBeat % 64;
+
+            int closestStep = 0;
+            int closestStepDiff = int.MaxValue;
+            for (int i = 1; i < (int)note.NoteTiming; i++)
+            {
+                int step = i * timingStepSize;
+                int stepDiff = Math.Abs(step - beatRemainder);
+                if (stepDiff < closestStepDiff)
+                {
+                    closestStep = step;
+                    closestStepDiff = stepDiff;
+                }
+            }
+
+            int b64thOrderNumber = b64thBeat - beatRemainder + closestStep + 1;
+            return b64thOrderNumber;
         }
     }
 }
