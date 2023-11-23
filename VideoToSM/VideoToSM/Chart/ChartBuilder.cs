@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using VideoToSM.Enums;
 using VideoToSM.Notes;
+using VideoToSM.VideoDecoder;
 
 namespace VideoToSM.Chart
 {
@@ -15,14 +16,14 @@ namespace VideoToSM.Chart
     {
         public Chart Chart { get; set; } = new();
 
-        public void ColorsToNote(List<SKColor> colors, int colNum, int frameNum)
+        public void ColorsToNote(NoteColorGroup noteColorGroup, int colNum, int frameNum)
         {
             int framesInPause = (int)Math.Round(3 * (G.FPS / 30));
 
             ENoteTiming? noteTiming = null;
-            foreach (var color in colors)
+            foreach (var color in new SKColor[] { noteColorGroup.CenterTop, noteColorGroup.CenterCenter, noteColorGroup.CenterBottom })
             {
-                noteTiming = ColorToENoteTiming(color);
+                noteTiming = ColorToENoteTiming(color, frameNum);
                 if (noteTiming != null)
                     break;
             }
@@ -43,10 +44,10 @@ namespace VideoToSM.Chart
             Chart.AddNote(note, colNum, frameNum);
         }
 
-        private ENoteTiming? ColorToENoteTiming(SKColor color)
+        private ENoteTiming? ColorToENoteTiming(SKColor color, int frameNum)
         {
-            SKColor lnMin = new(99, 90, 92); // 109, 100, 102
-            SKColor lnMax = new(141, 136, 141); // 131, 126, 131
+            SKColor lnMin = new(109, 100, 102); // 109, 100, 102
+            SKColor lnMax = new(131, 126, 131); // 131, 126, 131
 
             SKColor redMin = new(181, 26, 10); // 186, 31, 15
             SKColor redMax = new(195, 106, 88); // 190, 101, 83
@@ -62,10 +63,10 @@ namespace VideoToSM.Chart
             //{
             //    return ENoteTiming.Blue;
             //}
-            else if (IsLNInRange(color, lnMin, lnMax))
-            {
-                return ENoteTiming.Blue;
-            }
+            //else if (IsLNInRange(color, lnMin, lnMax))
+            //{
+            //    return ENoteTiming.Blue;
+            //}
             else
             {
                 return null;
@@ -79,7 +80,7 @@ namespace VideoToSM.Chart
                 color.Blue < minColor.Blue || color.Blue > maxColor.Blue)
                 return false;
 
-            int DIFF_TRESHOLD = 15;
+            int DIFF_TRESHOLD = 10;
             if (Math.Abs(color.Red - color.Green) > DIFF_TRESHOLD ||
                 Math.Abs(color.Red - color.Blue) > DIFF_TRESHOLD ||
                 Math.Abs(color.Green - color.Blue) > DIFF_TRESHOLD)

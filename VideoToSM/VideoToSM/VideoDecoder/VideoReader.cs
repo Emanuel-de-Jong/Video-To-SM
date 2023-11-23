@@ -46,26 +46,43 @@ namespace VideoToSM.VideoDecoder
             bool shouldWrite = false;
 
             string[] arrowSymbols = { "◄", "▼", "◆", "▲", "►" };
-            int[] xCoords = { 190, 258, 320, 375, 450 };
+            NoteCoordGroup[] noteCoordGroups = {
+                new(185, 205, 221),
+                new(264, 264, 264),
+                new(316, 316, 316),
+                new(366, 366, 366),
+                new(428, 428, 428)
+            };
 
             if (shouldWrite) G.TextBoxHelper.Write(frameNum);
 
-            for (int i = 0; i < xCoords.Length; i++)
+            for (int i = 0; i < noteCoordGroups.Length; i++)
             {
-                int x = xCoords[i];
-                int yBase = 370;
+                NoteCoordGroup noteCoordGroup = noteCoordGroups[i];
+                int yBase = 690;
 
-                var pixelUp = bitmap.GetPixel(x, yBase - 10);
-                var pixelMid = bitmap.GetPixel(x, yBase);
-                var pixelDown = bitmap.GetPixel(x, yBase + 10);
+                int PIXEL_OFFSET = 10;
+                NoteColorGroup noteColorGroup = new(
+                    bitmap.GetPixel(noteCoordGroup.Center, yBase - PIXEL_OFFSET),
+                    bitmap.GetPixel(noteCoordGroup.Center, yBase),
+                    bitmap.GetPixel(noteCoordGroup.Center, yBase + PIXEL_OFFSET),
+
+                    bitmap.GetPixel(noteCoordGroup.LNLeft, yBase - PIXEL_OFFSET),
+                    bitmap.GetPixel(noteCoordGroup.LNLeft, yBase),
+                    bitmap.GetPixel(noteCoordGroup.LNLeft, yBase + PIXEL_OFFSET),
+
+                    bitmap.GetPixel(noteCoordGroup.LNRight, yBase - PIXEL_OFFSET),
+                    bitmap.GetPixel(noteCoordGroup.LNRight, yBase),
+                    bitmap.GetPixel(noteCoordGroup.LNRight, yBase + PIXEL_OFFSET)
+                );
 
                 string arrowSymbol = arrowSymbols[i];
                 if (shouldWrite) G.TextBoxHelper.Write(" ");
-                if (shouldWrite) G.TextBoxHelper.Write(arrowSymbol, pixelUp);
-                if (shouldWrite) G.TextBoxHelper.Write(arrowSymbol, pixelMid);
-                if (shouldWrite) G.TextBoxHelper.Write(arrowSymbol, pixelDown);
+                if (shouldWrite) G.TextBoxHelper.Write(arrowSymbol, noteColorGroup.CenterTop);
+                if (shouldWrite) G.TextBoxHelper.Write(arrowSymbol, noteColorGroup.CenterCenter);
+                if (shouldWrite) G.TextBoxHelper.Write(arrowSymbol, noteColorGroup.CenterBottom);
 
-                G.ChartBuilder.ColorsToNote((new SKColor[] { pixelUp, pixelMid, pixelDown }).ToList(), i, frameNum);
+                G.ChartBuilder.ColorsToNote(noteColorGroup, i, frameNum);
             }
 
             if (shouldWrite) G.TextBoxHelper.WriteLine();
