@@ -21,7 +21,14 @@ namespace VideoToSM.Chart
 
         public void AddNote(Note note, int b64thOrderNumber, int frameNum)
         {
-            Notes.Add(b64thOrderNumber, note);
+            if (!Notes.ContainsKey(b64thOrderNumber))
+            {
+                Notes.Add(b64thOrderNumber, note);
+            }
+            else
+            {
+                G.TextBoxHelper.WriteLine("!!!DOUBLE NOTE " + b64thOrderNumber + "!!!");
+            }
 
             LastAddedNote = note;
             LastAddedKey = b64thOrderNumber;

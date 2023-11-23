@@ -49,9 +49,9 @@ namespace VideoToSM.VideoDecoder
             NoteCoordGroup[] noteCoordGroups = {
                 new(189, 205, 219),
                 new(264, 264, 264),
-                new(316, 316, 316),
+                new(299, 316, 329),
                 new(366, 366, 366),
-                new(428, 428, 428)
+                new(410, 428, 441)
             };
 
             if (shouldWrite) G.TextBoxHelper.Write(frameNum);
