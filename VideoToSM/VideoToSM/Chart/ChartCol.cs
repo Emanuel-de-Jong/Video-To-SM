@@ -11,7 +11,28 @@ namespace VideoToSM.Chart
     public class ChartCol
     {
         public Dictionary<int, Note> Notes { get; set; } = new();
-        public ENoteTiming? LastNoteTiming { get; set; }
-        public int? LastNoteFrameNum { get; set; }
+        public Note? LastAddedNote { get; set; }
+        public int LastAddedKey { get; set; }
+        public int? LastAddedFrameNum { get; set; }
+
+        public int? FirstLNFrameNum { get; set; }
+        public int? LastLNFrameNum { get; set; }
+        public int LNDetectionCount { get; set; } = 0;
+
+        public void AddNote(Note note, int b64thOrderNumber, int frameNum)
+        {
+            Notes.Add(b64thOrderNumber, note);
+
+            LastAddedNote = note;
+            LastAddedKey = b64thOrderNumber;
+            LastAddedFrameNum = frameNum;
+        }
+
+        public void ClearLNStats()
+        {
+            FirstLNFrameNum = null;
+            LastLNFrameNum = null;
+            LNDetectionCount = 0;
+        }
     }
 }

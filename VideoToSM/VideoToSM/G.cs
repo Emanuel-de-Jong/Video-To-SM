@@ -17,5 +17,15 @@ namespace VideoToSM
         public static TextBoxHelper? TextBoxHelper { get; set; }
         public static ChartBuilder ChartBuilder { get; set; } = new();
         public static SimfileGen SimfileGen { get; set; } = new();
+
+        public static int BaseOnFPS(int num)
+        {
+            return num * (int)Math.Round(FPS / 30);
+        }
+
+        public static double BaseOnFPS(double num)
+        {
+            return num * (30 / FPS);
+        }
     }
 }

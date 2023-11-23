@@ -2,6 +2,7 @@
 
 
 FEATURES
+LN coords for other cols
 Offset to middle of note image for better accuracy. Especially for the middle note. Take FPS into account.
 Support LongNotes
 Support ReleaseNotes

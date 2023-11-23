@@ -18,27 +18,47 @@ namespace VideoToSM.Chart
 
         public void ColorsToNote(NoteColorGroup noteColorGroup, int colNum, int frameNum)
         {
-            int framesInPause = (int)Math.Round(3 * (G.FPS / 30));
+            int framesInPause = G.BaseOnFPS(3);
+
+            ChartCol col = Chart.Columns[colNum];
 
             Note? note = FindNote(noteColorGroup);
             if (note != null)
             {
-                ChartCol col = Chart.Columns[colNum];
-                if (col.LastNoteTiming != null && note.NoteTiming == col.LastNoteTiming &&
-                    col.LastNoteFrameNum != null && frameNum - col.LastNoteFrameNum <= framesInPause)
+                if (col.LastAddedNote != null && note.NoteTiming == col.LastAddedNote.NoteTiming &&
+                    col.LastAddedFrameNum != null && frameNum - col.LastAddedFrameNum <= framesInPause)
                     return;
-
-                col.LastNoteTiming = note.NoteTiming;
-                col.LastNoteFrameNum = frameNum;
 
                 Chart.AddNote(note, colNum, frameNum);
                 return;
             }
 
+            bool isLNOngoing = col.FirstLNFrameNum != null;
+
             bool isLN = FindLN(noteColorGroup);
             if (isLN)
             {
+                if (!isLNOngoing)
+                    col.FirstLNFrameNum = frameNum;
 
+                col.LastLNFrameNum = frameNum;
+                col.LNDetectionCount++;
+            }
+            else if (isLNOngoing && frameNum - col.LastLNFrameNum > 1) // LN ended
+            {
+                if (frameNum - col.FirstLNFrameNum >= G.BaseOnFPS(4) && col.LNDetectionCount >= G.BaseOnFPS(2))
+                {
+                    LongNoteStart lnStart = new();
+                    lnStart.NoteTiming = col.LastAddedNote.NoteTiming;
+
+                    col.Notes[col.LastAddedKey] = lnStart;
+
+                    LongNoteEnd lnEnd = new();
+                    lnEnd.NoteTiming = lnStart.NoteTiming;
+                    Chart.AddNote(lnEnd, colNum, frameNum);
+                }
+
+                col.ClearLNStats();
             }
         }
 

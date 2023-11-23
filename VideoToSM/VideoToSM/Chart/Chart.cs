@@ -34,7 +34,7 @@ namespace VideoToSM.Chart
                 LastB64thOrderNumber = CalcB64thOrderNumber(note, frameNum);
             }
 
-            Columns[colNum].Notes[LastB64thOrderNumber] = note;
+            Columns[colNum].AddNote(note, LastB64thOrderNumber, frameNum);
         }
 
         public int CalcB64thOrderNumber(Note note, int frameNum)
