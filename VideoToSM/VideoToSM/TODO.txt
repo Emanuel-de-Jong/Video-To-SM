@@ -1,10 +1,9 @@
 ﻿BUGS
-
+Lit up LN detected as red shortnote
 
 FEATURES
 LN coords for other cols
 Offset to middle of note image for better accuracy. Especially for the middle note. Take FPS into account.
-Support LongNotes
 Support ReleaseNotes
 Support Mines
 Support VibroNotes
