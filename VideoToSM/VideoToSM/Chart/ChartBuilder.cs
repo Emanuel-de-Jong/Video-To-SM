@@ -38,13 +38,16 @@ namespace VideoToSM.Chart
             col.LastNoteTiming = noteTiming;
             col.LastNoteFrameNum = frameNum;
 
-            Note note = new();
+            ShortNote note = new();
             note.NoteTiming = noteTiming.Value;
             Chart.AddNote(note, colNum, frameNum);
         }
 
         private ENoteTiming? ColorToENoteTiming(SKColor color)
         {
+            SKColor lnMin = new(99, 90, 92); // 109, 100, 102
+            SKColor lnMax = new(141, 136, 141); // 131, 126, 131
+
             SKColor redMin = new(181, 26, 10); // 186, 31, 15
             SKColor redMax = new(195, 106, 88); // 190, 101, 83
 
@@ -59,10 +62,30 @@ namespace VideoToSM.Chart
             //{
             //    return ENoteTiming.Blue;
             //}
+            else if (IsLNInRange(color, lnMin, lnMax))
+            {
+                return ENoteTiming.Blue;
+            }
             else
             {
                 return null;
             }
+        }
+
+        private bool IsLNInRange(SKColor color, SKColor minColor, SKColor maxColor)
+        {
+            if (color.Red < minColor.Red || color.Red >  maxColor.Red ||
+                color.Green < minColor.Green || color.Green > maxColor.Green ||
+                color.Blue < minColor.Blue || color.Blue > maxColor.Blue)
+                return false;
+
+            int DIFF_TRESHOLD = 15;
+            if (Math.Abs(color.Red - color.Green) > DIFF_TRESHOLD ||
+                Math.Abs(color.Red - color.Blue) > DIFF_TRESHOLD ||
+                Math.Abs(color.Green - color.Blue) > DIFF_TRESHOLD)
+                return false;
+
+            return true;
         }
 
         private bool IsColorInRange(SKColor color, KnownColor mainColor, SKColor minColor, SKColor maxColor)

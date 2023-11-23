@@ -22,7 +22,7 @@ namespace VideoToSM.Simfile
             {
                 foreach (ChartCol chartCol in chart.Columns)
                 {
-                    notesSB.Append(chartCol.Notes.ContainsKey(i) ? 1 : 0);
+                    notesSB.Append(chartCol.Notes.ContainsKey(i) ? chartCol.Notes[i].Id : 0);
                 }
                 notesSB.AppendLine();
 

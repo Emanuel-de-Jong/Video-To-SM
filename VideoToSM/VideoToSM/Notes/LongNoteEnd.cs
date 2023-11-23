@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VideoToSM.Enums;
 
 namespace VideoToSM.Notes
 {
-    public class LongNote : Note
+    public class LongNoteEnd : Note
     {
-        public double Length { get; set; }
+        public LongNoteEnd()
+        {
+            Id = 3;
+        }
     }
 }

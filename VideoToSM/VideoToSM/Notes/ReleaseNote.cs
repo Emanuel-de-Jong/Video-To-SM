@@ -7,7 +7,7 @@ using VideoToSM.Enums;
 
 namespace VideoToSM.Notes
 {
-    public class ReleaseNote : LongNote
+    public class ReleaseNote : LongNoteStart
     {
     }
 }

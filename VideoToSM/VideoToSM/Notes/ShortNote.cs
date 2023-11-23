@@ -9,5 +9,9 @@ namespace VideoToSM.Notes
 {
     public class ShortNote : Note
     {
+        public ShortNote()
+        {
+            Id = 1;
+        }
     }
 }

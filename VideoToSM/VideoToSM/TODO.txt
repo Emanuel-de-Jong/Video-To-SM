@@ -10,3 +10,4 @@ Support VibroNotes
 Support multiple BPM
 Export to scc
 Async
+Shorter scc note blocks

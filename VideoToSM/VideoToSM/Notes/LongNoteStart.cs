@@ -7,8 +7,11 @@ using VideoToSM.Enums;
 
 namespace VideoToSM.Notes
 {
-    public class VibroNote : LongNoteStart
+    public class LongNoteStart : Note
     {
-        public int TimesToStep { get; set; }
+        public LongNoteStart()
+        {
+            Id = 2;
+        }
     }
 }
