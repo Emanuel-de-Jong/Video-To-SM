@@ -11,3 +11,29 @@ Support multiple BPM
 Export to scc
 Async
 Shorter scc note blocks
+
+NEW
+Check if OutFox sends scores to server
+
+Scale coords to resolution
+
+Change code and example videos to 60fps full hd
+
+LN Lit fix: when LNOngoing, loosen the maxColor boundries. Extra check LN Center lighter than Left and Right
+
+Song database
+	SQLite in Mega
+	IsConverted
+	HasReleaseNotes
+	Song table one to many chart table
+	View for chart to display song info
+
+Mine check before note check so it's not detected as red shortnote
+
+Check if OutFox even supports special notes
+
+Add metadata to textbox on BPM input. Append chart metadata and notes on each dropped video
+
+Check if OutFox already optimizes scc notes on saving
+
+Optimize scc notes bar sizes by putting the row and bar data in classes and check for certain empty rows afterwards (post processing)
