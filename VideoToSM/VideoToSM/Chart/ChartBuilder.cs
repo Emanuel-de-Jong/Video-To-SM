@@ -88,14 +88,21 @@ namespace VideoToSM.Chart
             SKColor blueMinColor = new(4, 64, 159); // 9, 69, 164
             SKColor blueMaxColor = new(74, 103, 151); // 69, 98, 146
 
+            SKColor yellowMinColor = new(255, 255, 255); // 
+            SKColor yellowMaxColor = new(255, 255, 255); // 
+
             if (IsColorInRange(color, KnownColor.Red, redMinColor, redMaxColor))
             {
                 return ENoteTiming.Red;
             }
-            //else if (IsColorInRange(color, KnownColor.Blue, blueMin, blueMax))
-            //{
-            //    return ENoteTiming.Blue;
-            //}
+            else if (IsColorInRange(color, KnownColor.Blue, blueMinColor, blueMaxColor))
+            {
+                return ENoteTiming.Blue;
+            }
+            else if (IsColorInRange(color, KnownColor.Yellow, yellowMinColor, yellowMaxColor))
+            {
+                return ENoteTiming.Yellow;
+            }
             else
             {
                 return null;

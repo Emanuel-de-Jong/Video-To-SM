@@ -11,6 +11,5 @@ namespace VideoToSM.Enums
         Red = 4,
         Blue = 8,
         Yellow = 16,
-        Pink = 32,
     }
 }

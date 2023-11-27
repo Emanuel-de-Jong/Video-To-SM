@@ -5,6 +5,7 @@ FEATURES
 LN coords for other cols
 Other note timings
 Offset to middle of note image for better accuracy. Especially for the middle note. Take FPS into account.
+Support triplets
 Support ReleaseNotes
 Support Mines
 Support VibroNotes
@@ -12,6 +13,7 @@ Support multiple BPM
 Export to scc
 Async
 Shorter scc note blocks
+Support time signatures other than 4/4
 
 NEW
 Check if OutFox sends scores to server
