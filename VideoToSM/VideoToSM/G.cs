@@ -12,6 +12,7 @@ namespace VideoToSM
     public static class G
     {
         public static int KEYS = 5;
+        public static int NOTE_TIME_ACCURACY = 64; // 64th notes
 
         public static int BPM { get; set; } = 146;
         public static double FPS { get; set; }

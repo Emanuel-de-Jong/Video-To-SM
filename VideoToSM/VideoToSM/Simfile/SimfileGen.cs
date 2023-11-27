@@ -17,7 +17,7 @@ namespace VideoToSM.Simfile
 
             NoteBars noteBars = new();
 
-            int notesLoopCount = chart.LastB64thOrderNumber + (64 - chart.LastB64thOrderNumber % 64);
+            int notesLoopCount = chart.LastB64thOrderNumber + (G.NOTE_TIME_ACCURACY - chart.LastB64thOrderNumber % G.NOTE_TIME_ACCURACY);
             for (int orderNumber = 1; orderNumber <= notesLoopCount; orderNumber++)
             {
                 noteBars.GenerateRow(chart, orderNumber);

@@ -22,7 +22,7 @@ namespace VideoToSM.Simfile
                 }
             }
 
-            int index = (orderNumber - 1) / 64;
+            int index = (orderNumber - 1) / G.NOTE_TIME_ACCURACY;
             if (Count < (index + 1))
             {
                 Add(new NoteBar());

@@ -44,8 +44,8 @@ namespace VideoToSM.Chart
             double b64thBeatsPerMS = b64thBPM / 60 / 1000;
             int b64thBeat = (int)(ms * b64thBeatsPerMS);
 
-            int timingStepSize = 64 / (int)note.NoteTiming;
-            int beatRemainder = b64thBeat % 64;
+            int timingStepSize = G.NOTE_TIME_ACCURACY / (int)note.NoteTiming;
+            int beatRemainder = b64thBeat % G.NOTE_TIME_ACCURACY;
 
             int closestStep = 0;
             int closestStepDiff = int.MaxValue;
