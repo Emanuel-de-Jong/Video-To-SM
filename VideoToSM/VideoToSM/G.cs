@@ -16,6 +16,8 @@ namespace VideoToSM
 
         public static int BPM { get; set; } = 146;
         public static double FPS { get; set; }
+        public static int ScreenWidth { get; set; }
+        public static int ScreenHeight { get; set; }
         public static VideoReader VideoReader { get; set; } = new();
         public static TextBoxHelper? TextBoxHelper { get; set; }
         public static ChartBuilder ChartBuilder { get; set; } = new();
