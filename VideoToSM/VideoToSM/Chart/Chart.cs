@@ -47,16 +47,18 @@ namespace VideoToSM.Chart
 
             int firstTimingStepSize = G.NOTE_TIME_ACCURACY / (int)note.NoteTiming;
             int timingStepSize = firstTimingStepSize * 2;
+            int timingInstances = (int)note.NoteTiming / 2;
 
             if (note.NoteTiming == ENoteTiming.Red)
             {
                 firstTimingStepSize = 0;
                 timingStepSize = (G.NOTE_TIME_ACCURACY / (int)ENoteTiming.Blue) * 2;
+                timingInstances = (int)ENoteTiming.Blue / 2;
             }
 
             int closestStep = 0;
             int closestStepDiff = int.MaxValue;
-            for (int i = 1; i <= (int)note.NoteTiming + 1; i++)
+            for (int i = 1; i <= timingInstances + 1; i++)
             {
                 int step = firstTimingStepSize + ((i - 1) * timingStepSize);
 

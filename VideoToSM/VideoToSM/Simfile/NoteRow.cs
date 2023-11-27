@@ -9,7 +9,7 @@ namespace VideoToSM.Simfile
 {
     public class NoteRow : List<int>
     {
-        public bool IsEmpty => this.Select(n => n != 0).Any();
+        public bool IsEmpty => !this.Where(n => n != 0).Any();
 
         public NoteRow()
         {

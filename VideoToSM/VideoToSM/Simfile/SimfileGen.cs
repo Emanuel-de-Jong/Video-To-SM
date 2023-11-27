@@ -16,10 +16,6 @@ namespace VideoToSM.Simfile
         {
             Chart.Chart chart = G.ChartBuilder.Chart;
 
-            // TEMP
-            chart.Columns[0].AddNote(new ShortNote(), chart.LastB64thOrderNumber + 3, chart.Columns[0].LastAddedFrameNum.Value + 9);
-            // END TEMP
-
             NoteBars noteBars = new();
 
             int notesLoopCount = chart.LastB64thOrderNumber + (G.NOTE_TIME_ACCURACY - chart.LastB64thOrderNumber % G.NOTE_TIME_ACCURACY);
