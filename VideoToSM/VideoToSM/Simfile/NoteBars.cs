@@ -7,7 +7,7 @@ using VideoToSM.Chart;
 
 namespace VideoToSM.Simfile
 {
-    public class NoteRows : List<NoteRow>
+    public class NoteBars : List<NoteBar>
     {
         public void GenerateRow(Chart.Chart chart, int orderNumber)
         {
@@ -22,17 +22,23 @@ namespace VideoToSM.Simfile
                 }
             }
 
-            Add(noteRow);
+            int index = (orderNumber - 1) / 64;
+            if (Count < (index + 1))
+            {
+                Add(new NoteBar());
+            }
+
+            this[index].Add(noteRow);
         }
 
         public override string ToString()
         {
             StringBuilder output = new();
-            for (int i = 0; i < Count; i++)
+            foreach (NoteBar noteBar in this)
             {
-                output.AppendLine(this[i].ToString());
+                output.Append(noteBar.ToString());
 
-                if ((i + 1) % 64 == 0 && (i + 1) != Count)
+                if (noteBar != this.Last())
                 {
                     output.AppendLine(",");
                 }

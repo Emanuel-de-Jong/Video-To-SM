@@ -21,13 +21,13 @@ namespace VideoToSM.Simfile
 
         public override string ToString()
         {
-            string output = "";
+            StringBuilder output = new();
             foreach (int note in this)
             {
-                output += note;
+                output.Append(note);
             }
 
-            return output;
+            return output.ToString();
         }
     }
 }
