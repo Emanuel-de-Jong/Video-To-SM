@@ -15,26 +15,15 @@ namespace VideoToSM.Simfile
         {
             Chart.Chart chart = G.ChartBuilder.Chart;
 
-            StringBuilder notesSB = new();
+            NoteRows noteRows = new();
 
             int notesLoopCount = chart.LastB64thOrderNumber + (64 - chart.LastB64thOrderNumber % 64);
-            for (int i = 1; i <= notesLoopCount; i++)
+            for (int orderNumber = 1; orderNumber <= notesLoopCount; orderNumber++)
             {
-                foreach (ChartCol chartCol in chart.Columns)
-                {
-                    notesSB.Append(chartCol.Notes.ContainsKey(i) ? chartCol.Notes[i].Id : 0);
-                }
-                notesSB.AppendLine();
-
-                if (i % 64 == 0 && i != notesLoopCount)
-                {
-                    notesSB.AppendLine(",");
-                }
+                noteRows.GenerateRow(chart, orderNumber);
             }
 
-            notesSB.Append(";");
-
-            Simfile.Notes = notesSB.ToString();
+            Simfile.Notes = noteRows.ToString();
 
             G.TextBoxHelper.Write(Simfile.Notes);
         }

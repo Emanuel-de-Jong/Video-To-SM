@@ -16,11 +16,10 @@ namespace VideoToSM.Chart
 
         public Chart()
         {
-            Columns.Add(new ChartCol());
-            Columns.Add(new ChartCol());
-            Columns.Add(new ChartCol());
-            Columns.Add(new ChartCol());
-            Columns.Add(new ChartCol());
+            for (int i = 0; i < G.KEYS; i++)
+            {
+                Columns.Add(new ChartCol());
+            }
         }
 
         public void AddNote(Note note, int colNum, int frameNum)
