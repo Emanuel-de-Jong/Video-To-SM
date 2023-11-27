@@ -43,15 +43,23 @@ namespace VideoToSM.Chart
             double b64thBPM = G.BPM * 2 * 2 * 2 * 2;
             double b64thBeatsPerMS = b64thBPM / 60 / 1000;
             int b64thBeat = (int)(ms * b64thBeatsPerMS);
-
-            int timingStepSize = G.NOTE_TIME_ACCURACY / (int)note.NoteTiming;
             int beatRemainder = b64thBeat % G.NOTE_TIME_ACCURACY;
+
+            int firstTimingStepSize = G.NOTE_TIME_ACCURACY / (int)note.NoteTiming;
+            int timingStepSize = firstTimingStepSize * 2;
+
+            if (note.NoteTiming == ENoteTiming.Red)
+            {
+                firstTimingStepSize = 0;
+                timingStepSize = (G.NOTE_TIME_ACCURACY / (int)ENoteTiming.Blue) * 2;
+            }
 
             int closestStep = 0;
             int closestStepDiff = int.MaxValue;
-            for (int i = note.NoteTiming == ENoteTiming.Red ? 0 : 1; i < (int)note.NoteTiming + 1; i++)
+            for (int i = 1; i <= (int)note.NoteTiming + 1; i++)
             {
-                int step = i * timingStepSize;
+                int step = firstTimingStepSize + ((i - 1) * timingStepSize);
+
                 int stepDiff = Math.Abs(step - beatRemainder);
                 if (stepDiff < closestStepDiff)
                 {

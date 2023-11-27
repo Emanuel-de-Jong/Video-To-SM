@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VideoToSM.Enums;
+using VideoToSM.Notes;
 
 namespace VideoToSM.Simfile
 {
@@ -12,13 +14,17 @@ namespace VideoToSM.Simfile
         {
             int[] noteTimes = { 64, 32, 16, 8 };
 
+            List<NoteRow> noteRowsToRemove = new();
             foreach (int noteTime in noteTimes)
             {
                 bool areAllEmpty = true;
 
-                for (int i = 1; i < noteTime; i++)
+                int firstTimingStepSize = G.NOTE_TIME_ACCURACY / noteTime;
+                int timingStepSize = firstTimingStepSize * 2;
+                for (int i = 1; i <= (noteTime / 2); i++)
                 {
-                    if (Count >= i && !this[i].IsEmpty)
+                    int step = firstTimingStepSize + ((i - 1) * timingStepSize);
+                    if (!this[step].IsEmpty)
                     {
                         areAllEmpty = false;
                         break;
@@ -27,16 +33,21 @@ namespace VideoToSM.Simfile
 
                 if (areAllEmpty)
                 {
-                    List<NoteRow> cachedNoteRows = new(this);
-
-                    for (int i = 1; i < noteTime; i++)
+                    for (int i = 1; i <= (noteTime / 2); i++)
                     {
-                        if (cachedNoteRows.Count >= i)
-                        {
-                            Remove(cachedNoteRows[i]);
-                        }
+                        int step = firstTimingStepSize + ((i - 1) * timingStepSize);
+                        noteRowsToRemove.Add(this[step]);
                     }
                 }
+                else
+                {
+                    break;
+                }
+            }
+
+            foreach (NoteRow noteToRemove in noteRowsToRemove)
+            {
+                Remove(noteToRemove);
             }
         }
 
