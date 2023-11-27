@@ -1,5 +1,9 @@
-﻿BUGS
+﻿WIP
+NoteBar.Compress
+
+BUGS
 Lit up LN detected as red shortnote
+Chart.CalcB64thOrderNumber: A 32th note can fit in a 4th note, but the game would call it a 4th note. Higher note timings will jump to slots they can't be in.
 
 FEATURES
 LN coords for other cols

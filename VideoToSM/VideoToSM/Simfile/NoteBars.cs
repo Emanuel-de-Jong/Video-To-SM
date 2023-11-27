@@ -31,6 +31,14 @@ namespace VideoToSM.Simfile
             this[index].Add(noteRow);
         }
 
+        public void Compress()
+        {
+            foreach (NoteBar noteBar in this)
+            {
+                noteBar.Compress();
+            }
+        }
+
         public override string ToString()
         {
             StringBuilder output = new();
