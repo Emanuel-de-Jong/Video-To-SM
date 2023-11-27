@@ -16,8 +16,6 @@ Shorter scc note blocks
 NEW
 Check if OutFox sends scores to server
 
-Change code and example videos to 60fps
-
 LN Lit fix: when LNOngoing, loosen the maxColor boundries. Extra check LN Center lighter than Left and Right
 
 Song database

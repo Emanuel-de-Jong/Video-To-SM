@@ -30,7 +30,7 @@ namespace VideoToSM
 
         public static double BaseOnFPS(double num)
         {
-            return num * (FPS / 30d);
+            return num * (FPS / 60d);
         }
 
         public static int BaseOnScreenWidth(int num)

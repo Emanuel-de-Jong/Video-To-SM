@@ -18,7 +18,7 @@ namespace VideoToSM.Chart
 
         public void ColorsToNote(NoteColorGroup noteColorGroup, int colNum, int frameNum)
         {
-            int framesInPause = G.BaseOnFPS(3);
+            int framesInPause = G.BaseOnFPS(6);
 
             ChartCol col = Chart.Columns[colNum];
 
@@ -44,9 +44,9 @@ namespace VideoToSM.Chart
                 col.LastLNFrameNum = frameNum;
                 col.LNDetectionCount++;
             }
-            else if (isLNOngoing && frameNum - col.LastLNFrameNum > 1) // LN ended
+            else if (isLNOngoing && frameNum - col.LastLNFrameNum > G.BaseOnFPS(1)) // LN ended
             {
-                if (frameNum - col.FirstLNFrameNum >= G.BaseOnFPS(4) && col.LNDetectionCount >= G.BaseOnFPS(2))
+                if (frameNum - col.FirstLNFrameNum >= G.BaseOnFPS(8) && col.LNDetectionCount >= G.BaseOnFPS(4))
                 {
                     LongNoteStart lnStart = new();
                     lnStart.NoteTiming = col.LastAddedNote.NoteTiming;
