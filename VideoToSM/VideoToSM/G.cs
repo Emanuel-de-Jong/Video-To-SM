@@ -25,12 +25,32 @@ namespace VideoToSM
 
         public static int BaseOnFPS(int num)
         {
-            return num * (int)Math.Round(FPS / 30);
+            return (int)Math.Round(BaseOnFPS((double)num));
         }
 
         public static double BaseOnFPS(double num)
         {
-            return num * (30 / FPS);
+            return num * (FPS / 30d);
+        }
+
+        public static int BaseOnScreenWidth(int num)
+        {
+            return (int)Math.Round(BaseOnScreenWidth((double)num));
+        }
+
+        public static double BaseOnScreenWidth(double num)
+        {
+            return num * (G.ScreenWidth / 1280d);
+        }
+
+        public static int BaseOnScreenHeight(int num)
+        {
+            return (int)Math.Round(BaseOnScreenHeight((double)num));
+        }
+
+        public static double BaseOnScreenHeight(double num)
+        {
+            return num * (G.ScreenWidth / 1280d);
         }
     }
 }

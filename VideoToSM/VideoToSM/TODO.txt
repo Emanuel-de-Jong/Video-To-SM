@@ -3,6 +3,7 @@ Lit up LN detected as red shortnote
 
 FEATURES
 LN coords for other cols
+Other note timings
 Offset to middle of note image for better accuracy. Especially for the middle note. Take FPS into account.
 Support ReleaseNotes
 Support Mines
@@ -15,9 +16,7 @@ Shorter scc note blocks
 NEW
 Check if OutFox sends scores to server
 
-Scale coords to resolution
-
-Change code and example videos to 60fps full hd
+Change code and example videos to 60fps
 
 LN Lit fix: when LNOngoing, loosen the maxColor boundries. Extra check LN Center lighter than Left and Right
 

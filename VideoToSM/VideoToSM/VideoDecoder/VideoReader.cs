@@ -47,11 +47,11 @@ namespace VideoToSM.VideoDecoder
 
             string[] arrowSymbols = { "◄", "▼", "◆", "▲", "►" };
             NoteCoordGroup[] noteCoordGroups = {
-                new(189, 205, 219),
-                new(264, 264, 264),
-                new(299, 316, 329),
-                new(366, 366, 366),
-                new(410, 428, 441)
+                new(G.BaseOnScreenWidth(189), G.BaseOnScreenWidth(205), G.BaseOnScreenWidth(219)),
+                new(G.BaseOnScreenWidth(264), G.BaseOnScreenWidth(264), G.BaseOnScreenWidth(264)),
+                new(G.BaseOnScreenWidth(299), G.BaseOnScreenWidth(316), G.BaseOnScreenWidth(329)),
+                new(G.BaseOnScreenWidth(366), G.BaseOnScreenWidth(366), G.BaseOnScreenWidth(366)),
+                new(G.BaseOnScreenWidth(410), G.BaseOnScreenWidth(428), G.BaseOnScreenWidth(441))
             };
 
             if (shouldWrite) G.TextBoxHelper.Write(frameNum);
@@ -59,21 +59,21 @@ namespace VideoToSM.VideoDecoder
             for (int i = 0; i < noteCoordGroups.Length; i++)
             {
                 NoteCoordGroup noteCoordGroup = noteCoordGroups[i];
-                int yBase = 690;
+                int yBase = G.BaseOnScreenHeight(690);
 
-                int PIXEL_OFFSET = 10;
+                int pixelOffset = G.BaseOnScreenHeight(10);
                 NoteColorGroup noteColorGroup = new(
-                    bitmap.GetPixel(noteCoordGroup.Center, yBase - PIXEL_OFFSET),
+                    bitmap.GetPixel(noteCoordGroup.Center, yBase - pixelOffset),
                     bitmap.GetPixel(noteCoordGroup.Center, yBase),
-                    bitmap.GetPixel(noteCoordGroup.Center, yBase + PIXEL_OFFSET),
+                    bitmap.GetPixel(noteCoordGroup.Center, yBase + pixelOffset),
 
-                    bitmap.GetPixel(noteCoordGroup.LNLeft, yBase - PIXEL_OFFSET),
+                    bitmap.GetPixel(noteCoordGroup.LNLeft, yBase - pixelOffset),
                     bitmap.GetPixel(noteCoordGroup.LNLeft, yBase),
-                    bitmap.GetPixel(noteCoordGroup.LNLeft, yBase + PIXEL_OFFSET),
+                    bitmap.GetPixel(noteCoordGroup.LNLeft, yBase + pixelOffset),
 
-                    bitmap.GetPixel(noteCoordGroup.LNRight, yBase - PIXEL_OFFSET),
+                    bitmap.GetPixel(noteCoordGroup.LNRight, yBase - pixelOffset),
                     bitmap.GetPixel(noteCoordGroup.LNRight, yBase),
-                    bitmap.GetPixel(noteCoordGroup.LNRight, yBase + PIXEL_OFFSET)
+                    bitmap.GetPixel(noteCoordGroup.LNRight, yBase + pixelOffset)
                 );
 
                 string arrowSymbol = arrowSymbols[i];
