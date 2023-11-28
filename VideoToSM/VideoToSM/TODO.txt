@@ -6,12 +6,6 @@ FEATURES
 LN coords for other cols
 Other note timings
 Offset to middle of note image for better accuracy. Especially for the middle note. Take FPS into account.
-Simfile class
-	Support multiple charts
-	Add metadata
-	Add ToString
-When adding notes to simfile, clear scc textbox and print simfile there
-Add metadata to textbox on BPM input. Append chart metadata and notes on each dropped video
 Support triplets
 Support ReleaseNotes
 Support Mines

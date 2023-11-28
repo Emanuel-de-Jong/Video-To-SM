@@ -25,10 +25,12 @@ namespace VideoToSM.Simfile
             }
 
             noteBars.Compress();
-            Simfile.Notes = noteBars.ToString();
+
+            SimfileDiff difficulty = new(noteBars.ToString());
+            Simfile.difficulties.Add(difficulty);
 
             G.SCCTextBoxHelper.Clear();
-            G.SCCTextBoxHelper.Write(Simfile.Notes);
+            G.SCCTextBoxHelper.Write(Simfile.ToString());
         }
     }
 }

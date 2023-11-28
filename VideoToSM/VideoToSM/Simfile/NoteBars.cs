@@ -52,8 +52,6 @@ namespace VideoToSM.Simfile
                 }
             }
 
-            output.Append(';');
-
             return output.ToString();
         }
     }
