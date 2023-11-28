@@ -6,7 +6,6 @@ FEATURES
 LN coords for other cols
 Other note timings
 Offset to middle of note image for better accuracy. Especially for the middle note. Take FPS into account.
-Split textbox into message and scc
 Simfile class
 	Support multiple charts
 	Add metadata

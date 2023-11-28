@@ -27,7 +27,7 @@ namespace VideoToSM.Simfile
             noteBars.Compress();
             Simfile.Notes = noteBars.ToString();
 
-            G.TextBoxHelper.Write(Simfile.Notes);
+            G.SCCTextBoxHelper.Write(Simfile.Notes);
         }
     }
 }

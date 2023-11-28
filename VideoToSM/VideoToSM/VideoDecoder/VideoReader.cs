@@ -54,7 +54,7 @@ namespace VideoToSM.VideoDecoder
                 new(G.BaseOnScreenWidth(410), G.BaseOnScreenWidth(428), G.BaseOnScreenWidth(441))
             };
 
-            if (shouldWrite) G.TextBoxHelper.Write(frameNum);
+            if (shouldWrite) G.MessageTextBoxHelper.Write(frameNum);
 
             for (int i = 0; i < noteCoordGroups.Length; i++)
             {
@@ -77,15 +77,15 @@ namespace VideoToSM.VideoDecoder
                 );
 
                 string arrowSymbol = arrowSymbols[i];
-                if (shouldWrite) G.TextBoxHelper.Write(" ");
-                if (shouldWrite) G.TextBoxHelper.Write(arrowSymbol, noteColorGroup.CenterTop);
-                if (shouldWrite) G.TextBoxHelper.Write(arrowSymbol, noteColorGroup.CenterCenter);
-                if (shouldWrite) G.TextBoxHelper.Write(arrowSymbol, noteColorGroup.CenterBottom);
+                if (shouldWrite) G.MessageTextBoxHelper.Write(" ");
+                if (shouldWrite) G.MessageTextBoxHelper.Write(arrowSymbol, noteColorGroup.CenterTop);
+                if (shouldWrite) G.MessageTextBoxHelper.Write(arrowSymbol, noteColorGroup.CenterCenter);
+                if (shouldWrite) G.MessageTextBoxHelper.Write(arrowSymbol, noteColorGroup.CenterBottom);
 
                 G.ChartBuilder.ColorsToNote(noteColorGroup, i, frameNum);
             }
 
-            if (shouldWrite) G.TextBoxHelper.WriteLine();
+            if (shouldWrite) G.MessageTextBoxHelper.WriteLine();
         }
     }
 }

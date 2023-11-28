@@ -19,7 +19,8 @@ namespace VideoToSM
         public static int ScreenWidth { get; set; }
         public static int ScreenHeight { get; set; }
         public static VideoReader VideoReader { get; set; } = new();
-        public static TextBoxHelper? TextBoxHelper { get; set; }
+        public static TextBoxHelper? MessageTextBoxHelper { get; set; }
+        public static TextBoxHelper? SCCTextBoxHelper { get; set; }
         public static ChartBuilder ChartBuilder { get; set; } = new();
         public static SimfileGen SimfileGen { get; set; } = new();
 

@@ -27,7 +27,7 @@ namespace VideoToSM.Chart
             }
             else
             {
-                G.TextBoxHelper.WriteLine("!!!DOUBLE NOTE " + b64thOrderNumber + "!!!");
+                G.MessageTextBoxHelper.WriteLine("!!!DOUBLE NOTE " + b64thOrderNumber + "!!!");
             }
 
             LastAddedNote = note;

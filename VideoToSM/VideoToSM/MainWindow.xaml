@@ -5,28 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VideoToSM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800"
-        AllowDrop="True" Drop="Window_Drop">
+        Title="MainWindow" Height="500" Width="800">
     <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
 
-        <TextBox Name="BPMTextBox" Grid.Column="1" Grid.Row="0" TextChanged="BPMTextBox_TextChanged" />
+        <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
+            <Label Content="BPM:" HorizontalAlignment="Center" />
+            <TextBox Name="BPMTextBox" TextChanged="BPMTextBox_TextChanged" Width="100" Height="20" />
+        </StackPanel>
 
-        <RichTextBox Name="MainRichTextBox" Grid.Column="1" Grid.Row="1">
-            <!--<FlowDocument>
-                <Paragraph>
-                    <Run Text="asd" Foreground="#FFA91C1C"/>
-                </Paragraph>
-            </FlowDocument>-->
-        </RichTextBox>
+        <Label Grid.Column="1" Grid.Row="0" Content="Drag &amp; Drop" Margin="20"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+               AllowDrop="True" Drop="Label_Drop"
+               BorderBrush="Black" BorderThickness="1" />
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Margin="20">
+            <Label Content="Message:" HorizontalAlignment="Center" />
+            <RichTextBox Name="MessageRichTextBox" Height="200" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="20">
+            <Label Content="SCC:" HorizontalAlignment="Center" />
+            <RichTextBox Name="SCCRichTextBox" Height="200" />
+        </StackPanel>
     </Grid>
 </Window>
