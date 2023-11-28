@@ -4,6 +4,7 @@ Lit up LN detected as red shortnote
 Missed LN in video breaks LN
 
 FEATURES
+Improve simfile and difficulty metadata
 LN coords for other cols
 Other note timings
 Support triplets
