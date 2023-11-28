@@ -27,19 +27,23 @@ namespace VideoToSM.Chart
             if (FirstNoteFrame == null)
             {
                 FirstNoteFrame = frameNum;
-                LastB64thOrderNumber = 1;
-            } else
-            {
-                LastB64thOrderNumber = CalcB64thOrderNumber(note, frameNum);
             }
+
+            int orderNumberFrameNum = frameNum;
+            if (note is ShortNote)
+            {
+                orderNumberFrameNum -= ((ShortNote)note).FrameOffsetByColNum[colNum];
+            }
+
+            LastB64thOrderNumber = CalcB64thOrderNumber(note, orderNumberFrameNum);
 
             Columns[colNum].AddNote(note, LastB64thOrderNumber, frameNum);
         }
 
-        public int CalcB64thOrderNumber(Note note, int frameNum)
+        public int CalcB64thOrderNumber(Note note, int orderNumberFrameNum)
         {
             double msPerFrame = 1000 / G.FPS;
-            double ms = (frameNum - FirstNoteFrame.Value) * msPerFrame;
+            double ms = (orderNumberFrameNum - FirstNoteFrame.Value) * msPerFrame;
             double b64thBPM = G.BPM * 2 * 2 * 2 * 2;
             double b64thBeatsPerMS = b64thBPM / 60 / 1000;
             int b64thBeat = (int)(ms * b64thBeatsPerMS);

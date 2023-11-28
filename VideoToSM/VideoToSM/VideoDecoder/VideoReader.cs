@@ -27,7 +27,8 @@ namespace VideoToSM.VideoDecoder
             var destinationPixelFormat = AVPixelFormat.@AV_PIX_FMT_BGRA;
             using var vfc = new VideoFrameConverter(sourceSize, sourcePixelFormat, destinationSize, destinationPixelFormat);
 
-            int frameNum = 0;
+            // Start at 10 so it can't become negative after frame offset
+            int frameNum = 10;
             while (vsd.TryDecodeNextFrame(out var frame))
             {
                 frameNum++;

@@ -11,5 +11,6 @@ namespace VideoToSM.Notes
     {
         public int Id { get; set; }
         public ENoteTiming NoteTiming { get; set; }
+        public List<int> FrameOffsetByColNum { get; set; } = new();
     }
 }
