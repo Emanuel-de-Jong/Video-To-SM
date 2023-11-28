@@ -59,5 +59,10 @@ namespace VideoToSM
 
             Paragraphs[0].Inlines.Add(run);
         }
+
+        public void Clear()
+        {
+            Paragraphs[0].Inlines.Clear();
+        }
     }
 }
