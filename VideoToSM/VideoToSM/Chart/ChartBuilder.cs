@@ -88,8 +88,8 @@ namespace VideoToSM.Chart
             SKColor blueMinColor = new(4, 64, 159); // 9, 69, 164
             SKColor blueMaxColor = new(74, 103, 151); // 69, 98, 146
 
-            SKColor yellowMinColor = new(255, 255, 255); // 
-            SKColor yellowMaxColor = new(255, 255, 255); // 
+            SKColor yellowMinColor = new(226, 230, 64); // 231, 235, 69
+            SKColor yellowMaxColor = new(254, 255, 138); // 249, 253, 133
 
             if (IsColorInRange(color, KnownColor.Red, redMinColor, redMaxColor))
             {
@@ -121,20 +121,34 @@ namespace VideoToSM.Chart
                     if (color.Blue < minColor.Blue)
                         return false;
                     break;
+                case KnownColor.Yellow:
+                    if (color.Red < minColor.Red ||
+                        color.Green <  minColor.Green)
+                        return false;
+                    break;
             }
 
-            int secondaryColorSum = (
-                mainColor != KnownColor.Red ? color.Red : 0 +
-                mainColor != KnownColor.Green ? color.Green : 0 +
-                mainColor != KnownColor.Blue ? color.Blue : 0);
-            int secondaryMinColorSum = (
-                mainColor != KnownColor.Red ? minColor.Red : 0 +
-                mainColor != KnownColor.Green ? minColor.Green : 0 +
-                mainColor != KnownColor.Blue ? minColor.Blue : 0);
-            int secondaryMaxColorSum = (
-                mainColor != KnownColor.Red ? maxColor.Red : 0 +
-                mainColor != KnownColor.Green ? maxColor.Green : 0 +
-                mainColor != KnownColor.Blue ? maxColor.Blue : 0);
+            int secondaryColorSum = 0;
+            int secondaryMinColorSum = 0;
+            int secondaryMaxColorSum = 0;
+            switch (mainColor)
+            {
+                case KnownColor.Red:
+                    secondaryColorSum = color.Green + color.Blue;
+                    secondaryMinColorSum = minColor.Green + minColor.Blue;
+                    secondaryMaxColorSum = maxColor.Green + maxColor.Blue;
+                    break;
+                case KnownColor.Blue:
+                    secondaryColorSum = color.Red + color.Green;
+                    secondaryMinColorSum = minColor.Red + minColor.Green;
+                    secondaryMaxColorSum = maxColor.Red + maxColor.Green;
+                    break;
+                case KnownColor.Yellow:
+                    secondaryColorSum = color.Blue;
+                    secondaryMinColorSum = minColor.Blue;
+                    secondaryMaxColorSum = maxColor.Blue;
+                    break;
+            }
 
             if (secondaryColorSum >= secondaryMinColorSum && secondaryMinColorSum <= secondaryMaxColorSum)
                 return true;
