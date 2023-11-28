@@ -18,7 +18,6 @@ Support time signatures other than 4/4
 
 OTHER
 Download videos
-Check if OutFox sends scores to server
 Check if OutFox even supports special notes
 Song database
 	SQLite in Mega
