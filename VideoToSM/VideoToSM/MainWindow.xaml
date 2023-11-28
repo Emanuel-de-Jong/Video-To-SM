@@ -16,9 +16,26 @@
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
-            <Label Content="BPM:" HorizontalAlignment="Center" />
-            <TextBox Name="BPMTextBox" TextChanged="BPMTextBox_TextChanged" Width="100" Height="20" />
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="0" Content="BPM:" VerticalContentAlignment="Center" />
+            <TextBox Name="BPMTextBox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"
+                     Width="100" Height="18" TextChanged="BPMTextBox_TextChanged" />
+
+            <Label Grid.Column="0" Grid.Row="1" Content="Difficulty:" VerticalContentAlignment="Center" />
+            <ComboBox Name="DifficultyTypeComboBox" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"
+                      Width="100" Height="18" SelectionChanged="DifficultyTypeComboBox_SelectionChanged" />
+        </Grid>
+        
+        <StackPanel Grid.Column="0" Grid.Row="0" Margin="20" HorizontalAlignment="Left">
         </StackPanel>
 
         <Label Grid.Column="1" Grid.Row="0" Content="Drag &amp; Drop" Margin="20"

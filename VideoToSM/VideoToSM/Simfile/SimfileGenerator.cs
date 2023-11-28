@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VideoToSM.Chart;
+using VideoToSM.Enums;
 using VideoToSM.Notes;
 
 namespace VideoToSM.Simfile
 {
-    public class SimfileGen
+    public class SimfileGenerator
     {
         public Simfile Simfile { get; set; } = new();
 
@@ -26,11 +27,13 @@ namespace VideoToSM.Simfile
 
             noteBars.Compress();
 
-            SimfileDiff difficulty = new(noteBars.ToString());
+            SimfileDifficulty difficulty = new(noteBars.ToString());
             Simfile.difficulties.Add(difficulty);
 
             G.SCCTextBoxHelper.Clear();
             G.SCCTextBoxHelper.Write(Simfile.ToString());
+
+            G.MessageTextBoxHelper.WriteLine("Video converted");
         }
     }
 }

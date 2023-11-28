@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VideoToSM.Enums;
 
 namespace VideoToSM.Simfile
 {
-    public class SimfileDiff
+    public class SimfileDifficulty
     {
         public Dictionary<string, string> Metadata { get; set; } = new();
         public string Notes { get; set; }
 
-        public SimfileDiff(string notes)
+        public SimfileDifficulty(string notes)
         {
             Notes = notes;
 
@@ -22,7 +23,7 @@ namespace VideoToSM.Simfile
             Metadata.Add("BANNER", "");
             Metadata.Add("DESCRIPTION", "");
             Metadata.Add("CHARTSTYLE", "");
-            Metadata.Add("DIFFICULTY", "Beginner");
+            Metadata.Add("DIFFICULTY", G.DifficultyType.ToString());
             Metadata.Add("METER", "5");
             Metadata.Add("METERF", "0.000000");
             Metadata.Add("LASTSECONDHINT", "13.528890");

@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using VideoToSM.Enums;
 using VideoToSM.VideoDecoder;
 
 namespace VideoToSM
@@ -11,6 +14,13 @@ namespace VideoToSM
         public MainWindow()
         {
             InitializeComponent();
+
+            foreach (EDifficultyType difficultyType in Enum.GetValues(typeof(EDifficultyType)))
+            {
+                ComboBoxItem item = new();
+                item.Content = difficultyType;
+                DifficultyTypeComboBox.Items.Add(item);
+            }
 
             G.MessageTextBoxHelper = new(MessageRichTextBox);
             G.SCCTextBoxHelper = new(SCCRichTextBox);
@@ -33,6 +43,12 @@ namespace VideoToSM
                 G.VideoReader.Read(files[0]);
                 G.SimfileGen.Generate();
             }
+        }
+
+        private void DifficultyTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem item = (ComboBoxItem)DifficultyTypeComboBox.SelectedItem;
+            G.DifficultyType = (EDifficultyType)item.Content;
         }
     }
 }

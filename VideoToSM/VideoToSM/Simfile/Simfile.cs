@@ -9,7 +9,7 @@ namespace VideoToSM.Simfile
     public class Simfile
     {
         public Dictionary<string, string> Metadata { get; set; } = new();
-        public List<SimfileDiff> difficulties = new();
+        public List<SimfileDifficulty> difficulties = new();
 
         public Simfile()
         {
@@ -50,7 +50,7 @@ namespace VideoToSM.Simfile
                 output.AppendLine(";");
             }
 
-            foreach (SimfileDiff difficulty in difficulties)
+            foreach (SimfileDifficulty difficulty in difficulties)
             {
                 output.AppendLine();
                 output.AppendLine(difficulty.ToString());
