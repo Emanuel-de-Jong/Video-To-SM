@@ -1,36 +1,36 @@
 ﻿BUGS
 Lit up LN detected as red shortnote
+	when LNOngoing, loosen the maxColor boundries. Extra check LN Center lighter than Left and Right
 
 FEATURES
 LN coords for other cols
 Other note timings
 Offset to middle of note image for better accuracy. Especially for the middle note. Take FPS into account.
+Split textbox into message and scc
+Simfile class
+	Support multiple charts
+	Add metadata
+	Add ToString
+When adding notes to simfile, clear scc textbox and print simfile there
+Add metadata to textbox on BPM input. Append chart metadata and notes on each dropped video
 Support triplets
 Support ReleaseNotes
 Support Mines
+	Mine check before note check so it's not detected as red shortnote
 Support VibroNotes
 Support multiple BPM
 Export to scc
 Async
-Shorter scc note blocks
 Support time signatures other than 4/4
 
-NEW
+OTHER
+Download videos
 Check if OutFox sends scores to server
-
-LN Lit fix: when LNOngoing, loosen the maxColor boundries. Extra check LN Center lighter than Left and Right
-
+Check if OutFox already optimizes scc notes on saving
+Check if OutFox even supports special notes
 Song database
 	SQLite in Mega
 	IsConverted
 	HasReleaseNotes
 	Song table one to many chart table
 	View for chart to display song info
-
-Mine check before note check so it's not detected as red shortnote
-
-Check if OutFox even supports special notes
-
-Add metadata to textbox on BPM input. Append chart metadata and notes on each dropped video
-
-Check if OutFox already optimizes scc notes on saving
