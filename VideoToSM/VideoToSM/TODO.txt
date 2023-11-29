@@ -5,4 +5,5 @@ FEATURES
 Improve simfile and difficulty metadata
 
 OTHER
+Make release
 Download videos

@@ -32,39 +32,6 @@ namespace VideoToSM.Chart
             //HandleLN(noteColorGroup, colNum, frameNum);
         }
 
-        private void HandleLN(NoteColorGroup noteColorGroup, int colNum, int frameNum)
-        {
-            ChartCol col = Chart.Columns[colNum];
-
-            bool isLNOngoing = col.FirstLNFrameNum != null;
-
-            bool isLN = FindLN(noteColorGroup);
-            if (isLN)
-            {
-                if (!isLNOngoing)
-                    col.FirstLNFrameNum = frameNum;
-
-                col.LastLNFrameNum = frameNum;
-                col.LNDetectionCount++;
-            }
-            else if (isLNOngoing && frameNum - col.LastLNFrameNum > G.BaseOnFPS(1)) // LN ended
-            {
-                if (frameNum - col.FirstLNFrameNum >= G.BaseOnFPS(8) && col.LNDetectionCount >= G.BaseOnFPS(4))
-                {
-                    LongNoteStart lnStart = new();
-                    lnStart.NoteTiming = col.LastAddedNote.NoteTiming;
-
-                    col.Notes[col.LastAddedKey] = lnStart;
-
-                    LongNoteEnd lnEnd = new();
-                    lnEnd.NoteTiming = lnStart.NoteTiming;
-                    Chart.AddNote(lnEnd, colNum, frameNum);
-                }
-
-                col.ClearLNStats();
-            }
-        }
-
         private Note? FindNote(NoteColorGroup noteColorGroup)
         {
             ENoteTiming? noteTiming = null;
@@ -153,6 +120,39 @@ namespace VideoToSM.Chart
             }
 
             return secondaryColorSum >= secondaryMinColorSum && secondaryMinColorSum <= secondaryMaxColorSum;
+        }
+
+        private void HandleLN(NoteColorGroup noteColorGroup, int colNum, int frameNum)
+        {
+            ChartCol col = Chart.Columns[colNum];
+
+            bool isLNOngoing = col.FirstLNFrameNum != null;
+
+            bool isLN = FindLN(noteColorGroup);
+            if (isLN)
+            {
+                if (!isLNOngoing)
+                    col.FirstLNFrameNum = frameNum;
+
+                col.LastLNFrameNum = frameNum;
+                col.LNDetectionCount++;
+            }
+            else if (isLNOngoing && frameNum - col.LastLNFrameNum > G.BaseOnFPS(1)) // LN ended
+            {
+                if (frameNum - col.FirstLNFrameNum >= G.BaseOnFPS(8) && col.LNDetectionCount >= G.BaseOnFPS(4))
+                {
+                    LongNoteStart lnStart = new();
+                    lnStart.NoteTiming = col.LastAddedNote.NoteTiming;
+
+                    col.Notes[col.LastAddedKey] = lnStart;
+
+                    LongNoteEnd lnEnd = new();
+                    lnEnd.NoteTiming = lnStart.NoteTiming;
+                    Chart.AddNote(lnEnd, colNum, frameNum);
+                }
+
+                col.ClearLNStats();
+            }
         }
 
         private bool FindLN(NoteColorGroup noteColorGroup)
