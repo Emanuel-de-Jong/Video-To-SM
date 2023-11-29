@@ -14,7 +14,7 @@ namespace VideoToSM
         {
             InitializeComponent();
 
-            foreach (EDifficultyType difficultyType in Enum.GetValues(typeof(EDifficultyType)))
+            foreach (ESMXDifficultyType difficultyType in Enum.GetValues(typeof(ESMXDifficultyType)))
             {
                 ComboBoxItem item = new();
                 item.Content = difficultyType;
@@ -48,7 +48,7 @@ namespace VideoToSM
         private void DifficultyTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem item = (ComboBoxItem)DifficultyTypeComboBox.SelectedItem;
-            G.DifficultyType = (EDifficultyType)item.Content;
+            G.DifficultyType = (ESMXDifficultyType)item.Content;
         }
     }
 }

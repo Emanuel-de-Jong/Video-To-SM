@@ -12,7 +12,7 @@ namespace VideoToSM
         public static int NOTE_TIME_ACCURACY = 64; // 64th notes
 
         public static int BPM { get; set; } = 146;
-        public static EDifficultyType DifficultyType { get; set; } = EDifficultyType.Beginner;
+        public static ESMXDifficultyType DifficultyType { get; set; } = ESMXDifficultyType.HardPlus;
 
         public static double FPS { get; set; }
         public static int ScreenWidth { get; set; }

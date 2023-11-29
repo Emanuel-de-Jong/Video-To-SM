@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using VideoToSM.Enums;
 
 namespace VideoToSM.Simfile
 {
@@ -17,9 +18,9 @@ namespace VideoToSM.Simfile
             //Metadata.Add("CHARTHASH", "1364798683");
             Metadata.Add("STEPSTYPE", "smx-single");
             //Metadata.Add("BANNER", "");
-            //Metadata.Add("DESCRIPTION", "");
+            Metadata.Add("DESCRIPTION", G.DifficultyType.Print());
             //Metadata.Add("CHARTSTYLE", "");
-            Metadata.Add("DIFFICULTY", G.DifficultyType.ToString());
+            Metadata.Add("DIFFICULTY", G.DifficultyType.ToSM());
             Metadata.Add("METER", "1");
             //Metadata.Add("METERF", "0.000000");
             //Metadata.Add("LASTSECONDHINT", "13.528890");
