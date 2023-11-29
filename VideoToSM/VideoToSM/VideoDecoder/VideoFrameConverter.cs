@@ -1,7 +1,7 @@
-﻿using System;
+﻿using FFmpeg.AutoGen.Abstractions;
+using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using FFmpeg.AutoGen.Abstractions;
 
 namespace VideoToSM.VideoDecoder;
 
@@ -31,7 +31,7 @@ public sealed unsafe class VideoFrameConverter : IDisposable
         if (_pConvertContext == null)
             throw new ApplicationException("Could not initialize the conversion context.");
 
-        var convertedFrameBufferSize = ffmpeg.av_image_get_buffer_size(destinationPixelFormat,
+        int convertedFrameBufferSize = ffmpeg.av_image_get_buffer_size(destinationPixelFormat,
             destinationSize.Width,
             destinationSize.Height,
             1);
@@ -64,9 +64,9 @@ public sealed unsafe class VideoFrameConverter : IDisposable
             _dstData,
             _dstLinesize);
 
-        var data = new byte_ptr8();
+        byte_ptr8 data = new();
         data.UpdateFrom(_dstData);
-        var linesize = new int8();
+        int8 linesize = new();
         linesize.UpdateFrom(_dstLinesize);
 
         return new AVFrame

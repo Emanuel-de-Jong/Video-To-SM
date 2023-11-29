@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
-using VideoToSM.Enums;
 
 namespace VideoToSM.Simfile
 {
@@ -47,7 +43,7 @@ namespace VideoToSM.Simfile
         {
             StringBuilder output = new();
 
-            foreach (var kv in Metadata)
+            foreach (KeyValuePair<string, string> kv in Metadata)
             {
                 output.Append('#');
                 output.Append(kv.Key);

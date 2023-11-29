@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
 
 namespace VideoToSM.Simfile
 {
@@ -15,7 +12,7 @@ namespace VideoToSM.Simfile
         {
             for (int note = 0; note < G.KEYS; note++)
             {
-                this.Add(0);
+                Add(0);
             }
         }
 

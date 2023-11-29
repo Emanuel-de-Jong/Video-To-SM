@@ -1,8 +1,8 @@
-﻿using System;
+﻿using FFmpeg.AutoGen.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using FFmpeg.AutoGen.Abstractions;
 
 namespace VideoToSM.VideoDecoder;
 
@@ -19,7 +19,7 @@ public sealed unsafe class VideoStreamDecoder : IDisposable
     {
         _pFormatContext = ffmpeg.avformat_alloc_context();
         _receivedFrame = ffmpeg.av_frame_alloc();
-        var pFormatContext = _pFormatContext;
+        AVFormatContext* pFormatContext = _pFormatContext;
         ThrowExceptionIfError(ffmpeg.avformat_open_input(&pFormatContext, url, null, null));
         ThrowExceptionIfError(ffmpeg.avformat_find_stream_info(_pFormatContext, null));
         AVCodec* codec = null;
@@ -40,7 +40,7 @@ public sealed unsafe class VideoStreamDecoder : IDisposable
         G.ScreenWidth = _pCodecContext->width;
         G.ScreenHeight = _pCodecContext->height;
 
-        for (var i = 0; i < pFormatContext->nb_streams; i++)
+        for (int i = 0; i < pFormatContext->nb_streams; i++)
         {
             if (pFormatContext->streams[i]->codecpar->codec_type == AVMediaType.AVMEDIA_TYPE_VIDEO)
             {
@@ -56,17 +56,16 @@ public sealed unsafe class VideoStreamDecoder : IDisposable
 
     public static unsafe string av_strerror(int error)
     {
-        var bufferSize = 1024;
-        var buffer = stackalloc byte[bufferSize];
+        int bufferSize = 1024;
+        byte* buffer = stackalloc byte[bufferSize];
         ffmpeg.av_strerror(error, buffer, (ulong)bufferSize);
-        var message = Marshal.PtrToStringAnsi((IntPtr)buffer);
+        string? message = Marshal.PtrToStringAnsi((IntPtr)buffer);
         return message;
     }
 
     public static int ThrowExceptionIfError(int error)
     {
-        if (error < 0) throw new ApplicationException(av_strerror(error));
-        return error;
+        return error < 0 ? throw new ApplicationException(av_strerror(error)) : error;
     }
 
     public string CodecName { get; }
@@ -75,14 +74,14 @@ public sealed unsafe class VideoStreamDecoder : IDisposable
 
     public void Dispose()
     {
-        var pFrame = _pFrame;
+        AVFrame* pFrame = _pFrame;
         ffmpeg.av_frame_free(&pFrame);
 
-        var pPacket = _pPacket;
+        AVPacket* pPacket = _pPacket;
         ffmpeg.av_packet_free(&pPacket);
 
         ffmpeg.avcodec_close(_pCodecContext);
-        var pFormatContext = _pFormatContext;
+        AVFormatContext* pFormatContext = _pFormatContext;
         ffmpeg.avformat_close_input(&pFormatContext);
     }
 
@@ -128,7 +127,9 @@ public sealed unsafe class VideoStreamDecoder : IDisposable
             frame = *_receivedFrame;
         }
         else
+        {
             frame = *_pFrame;
+        }
 
         return true;
     }
@@ -136,12 +137,12 @@ public sealed unsafe class VideoStreamDecoder : IDisposable
     public IReadOnlyDictionary<string, string> GetContextInfo()
     {
         AVDictionaryEntry* tag = null;
-        var result = new Dictionary<string, string>();
+        Dictionary<string, string> result = new();
 
         while ((tag = ffmpeg.av_dict_get(_pFormatContext->metadata, "", tag, ffmpeg.AV_DICT_IGNORE_SUFFIX)) != null)
         {
-            var key = Marshal.PtrToStringAnsi((IntPtr)tag->key);
-            var value = Marshal.PtrToStringAnsi((IntPtr)tag->value);
+            string? key = Marshal.PtrToStringAnsi((IntPtr)tag->key);
+            string? value = Marshal.PtrToStringAnsi((IntPtr)tag->value);
             result.Add(key, value);
         }
 

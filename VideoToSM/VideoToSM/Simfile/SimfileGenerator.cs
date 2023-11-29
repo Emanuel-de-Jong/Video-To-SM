@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VideoToSM.Chart;
-using VideoToSM.Enums;
-using VideoToSM.Notes;
-
-namespace VideoToSM.Simfile
+﻿namespace VideoToSM.Simfile
 {
     public class SimfileGenerator
     {

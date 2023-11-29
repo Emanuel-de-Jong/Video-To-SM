@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using VideoToSM.Enums;
-using VideoToSM.VideoDecoder;
 
 namespace VideoToSM
 {

@@ -1,11 +1,6 @@
 ﻿using SkiaSharp;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
 using VideoToSM.Enums;
 using VideoToSM.Notes;
 using VideoToSM.VideoDecoder;
@@ -26,7 +21,9 @@ namespace VideoToSM.Chart
                 ChartCol col = Chart.Columns[colNum];
                 if (col.LastAddedNote != null && note.NoteTiming == col.LastAddedNote.NoteTiming &&
                     col.LastAddedFrameNum != null && frameNum - col.LastAddedFrameNum <= framesInPause)
+                {
                     return;
+                }
 
                 Chart.AddNote(note, colNum, frameNum);
                 return;
@@ -71,7 +68,7 @@ namespace VideoToSM.Chart
         private Note? FindNote(NoteColorGroup noteColorGroup)
         {
             ENoteTiming? noteTiming = null;
-            foreach (var color in new SKColor[] { noteColorGroup.CenterTop, noteColorGroup.CenterCenter, noteColorGroup.CenterBottom })
+            foreach (SKColor color in new SKColor[] { noteColorGroup.CenterTop, noteColorGroup.CenterCenter, noteColorGroup.CenterBottom })
             {
                 noteTiming = FindNoteTiming(color);
                 if (noteTiming != null)
@@ -110,10 +107,8 @@ namespace VideoToSM.Chart
             {
                 return ENoteTiming.Blue;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         private bool IsColorInRange(SKColor color, KnownColor mainColor, SKColor minColor, SKColor maxColor)
@@ -130,7 +125,7 @@ namespace VideoToSM.Chart
                     break;
                 case KnownColor.Yellow:
                     if (color.Red < minColor.Red ||
-                        color.Green <  minColor.Green)
+                        color.Green < minColor.Green)
                         return false;
                     break;
             }
@@ -157,10 +152,7 @@ namespace VideoToSM.Chart
                     break;
             }
 
-            if (secondaryColorSum >= secondaryMinColorSum && secondaryMinColorSum <= secondaryMaxColorSum)
-                return true;
-
-            return false;
+            return secondaryColorSum >= secondaryMinColorSum && secondaryMinColorSum <= secondaryMaxColorSum;
         }
 
         private bool FindLN(NoteColorGroup noteColorGroup)
@@ -190,15 +182,14 @@ namespace VideoToSM.Chart
             if (color.Red < minColor.Red || color.Red > maxColor.Red ||
                 color.Green < minColor.Green || color.Green > maxColor.Green ||
                 color.Blue < minColor.Blue || color.Blue > maxColor.Blue)
+            {
                 return false;
+            }
 
             int DIFF_TRESHOLD = 10;
-            if (Math.Abs(color.Red - color.Green) > DIFF_TRESHOLD ||
-                Math.Abs(color.Red - color.Blue) > DIFF_TRESHOLD ||
-                Math.Abs(color.Green - color.Blue) > DIFF_TRESHOLD)
-                return false;
-
-            return true;
+            return Math.Abs(color.Red - color.Green) <= DIFF_TRESHOLD &&
+                Math.Abs(color.Red - color.Blue) <= DIFF_TRESHOLD &&
+                Math.Abs(color.Green - color.Blue) <= DIFF_TRESHOLD;
         }
     }
 }
