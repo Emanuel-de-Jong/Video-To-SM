@@ -17,7 +17,7 @@ namespace VideoToSM.VideoDecoder
             DynamicallyLoadedBindings.Initialize();
         }
 
-        public unsafe void Read(string filePath)
+        public unsafe void Read(string filePath, bool isReadLeftSide)
         {
             using var vsd = new VideoStreamDecoder(filePath);
 
@@ -38,17 +38,18 @@ namespace VideoToSM.VideoDecoder
                 using var bitmap = new SKBitmap();
                 bitmap.InstallPixels(imageInfo, (IntPtr)convertedFrame.data[0]);
 
-                FindNotesInFrame(bitmap, frameNum);
+                FindNotesInFrame(bitmap, frameNum, isReadLeftSide);
             }
         }
 
-        private void FindNotesInFrame(SKBitmap bitmap, int frameNum)
+        private void FindNotesInFrame(SKBitmap bitmap, int frameNum, bool isReadLeftSide)
         {
             bool shouldWrite = false;
 
             string[] arrowSymbols = { "◄", "▼", "◆", "▲", "►" };
+
             NoteCoordGroup[] noteCoordGroups = {
-                new(G.BaseOnScreenWidth(189), G.BaseOnScreenWidth(205), G.BaseOnScreenWidth(219)),
+                new(G.BaseOnScreenWidth(189), G.BaseOnScreenWidth(202), G.BaseOnScreenWidth(219)),
                 new(G.BaseOnScreenWidth(264), G.BaseOnScreenWidth(264), G.BaseOnScreenWidth(264)),
                 new(G.BaseOnScreenWidth(299), G.BaseOnScreenWidth(316), G.BaseOnScreenWidth(329)),
                 new(G.BaseOnScreenWidth(366), G.BaseOnScreenWidth(366), G.BaseOnScreenWidth(366)),
@@ -57,6 +58,8 @@ namespace VideoToSM.VideoDecoder
 
             if (shouldWrite) G.MessageTextBoxHelper.Write(frameNum);
 
+            int xOffset = isReadLeftSide ? 0 : 653;
+
             for (int i = 0; i < noteCoordGroups.Length; i++)
             {
                 NoteCoordGroup noteCoordGroup = noteCoordGroups[i];
@@ -64,17 +67,17 @@ namespace VideoToSM.VideoDecoder
 
                 int pixelOffset = G.BaseOnScreenHeight(10);
                 NoteColorGroup noteColorGroup = new(
-                    bitmap.GetPixel(noteCoordGroup.Center, yBase - pixelOffset),
-                    bitmap.GetPixel(noteCoordGroup.Center, yBase),
-                    bitmap.GetPixel(noteCoordGroup.Center, yBase + pixelOffset),
+                    bitmap.GetPixel(xOffset + noteCoordGroup.Center, yBase - pixelOffset),
+                    bitmap.GetPixel(xOffset + noteCoordGroup.Center, yBase),
+                    bitmap.GetPixel(xOffset + noteCoordGroup.Center, yBase + pixelOffset),
 
-                    bitmap.GetPixel(noteCoordGroup.LNLeft, yBase - pixelOffset),
-                    bitmap.GetPixel(noteCoordGroup.LNLeft, yBase),
-                    bitmap.GetPixel(noteCoordGroup.LNLeft, yBase + pixelOffset),
+                    bitmap.GetPixel(xOffset + noteCoordGroup.LNLeft, yBase - pixelOffset),
+                    bitmap.GetPixel(xOffset + noteCoordGroup.LNLeft, yBase),
+                    bitmap.GetPixel(xOffset + noteCoordGroup.LNLeft, yBase + pixelOffset),
 
-                    bitmap.GetPixel(noteCoordGroup.LNRight, yBase - pixelOffset),
-                    bitmap.GetPixel(noteCoordGroup.LNRight, yBase),
-                    bitmap.GetPixel(noteCoordGroup.LNRight, yBase + pixelOffset)
+                    bitmap.GetPixel(xOffset + noteCoordGroup.LNRight, yBase - pixelOffset),
+                    bitmap.GetPixel(xOffset + noteCoordGroup.LNRight, yBase),
+                    bitmap.GetPixel(xOffset + noteCoordGroup.LNRight, yBase + pixelOffset)
                 );
 
                 string arrowSymbol = arrowSymbols[i];

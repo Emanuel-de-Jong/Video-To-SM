@@ -24,6 +24,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="25" />
                 <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
             </Grid.RowDefinitions>
 
             <Label Grid.Column="0" Grid.Row="0" Content="BPM:" VerticalContentAlignment="Center" />
@@ -33,6 +34,10 @@
             <Label Grid.Column="0" Grid.Row="1" Content="Difficulty:" VerticalContentAlignment="Center" />
             <ComboBox Name="DifficultyTypeComboBox" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"
                       Width="100" Height="18" SelectionChanged="DifficultyTypeComboBox_SelectionChanged" />
+            
+            <Label Grid.Column="0" Grid.Row="2" Content="Read left side:" VerticalContentAlignment="Center" />
+            <CheckBox Name="ReadLeftSideCheckBox" Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center"
+                      IsChecked="True" />
         </Grid>
         
         <StackPanel Grid.Column="0" Grid.Row="0" Margin="20" HorizontalAlignment="Left">

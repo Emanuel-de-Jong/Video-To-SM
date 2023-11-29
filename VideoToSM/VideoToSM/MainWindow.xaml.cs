@@ -40,7 +40,8 @@ namespace VideoToSM
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
-                G.VideoReader.Read(files[0]);
+                G.ChartBuilder.Chart = new();
+                G.VideoReader.Read(files[0], ReadLeftSideCheckBox.IsChecked.Value);
                 G.SimfileGen.Generate();
             }
         }
