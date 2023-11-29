@@ -119,7 +119,7 @@ namespace VideoToSM.Chart
                     break;
             }
 
-            return secondaryColorSum >= secondaryMinColorSum && secondaryMinColorSum <= secondaryMaxColorSum;
+            return secondaryColorSum >= secondaryMinColorSum && secondaryColorSum <= secondaryMaxColorSum;
         }
 
         private void HandleLN(NoteColorGroup noteColorGroup, int colNum, int frameNum)

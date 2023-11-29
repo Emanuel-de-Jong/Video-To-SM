@@ -1,7 +1,4 @@
-﻿BUGS
-Yellow notes often come with a fake red after
-
-FEATURES
+﻿FEATURES
 Improve simfile and difficulty metadata
 
 OTHER
