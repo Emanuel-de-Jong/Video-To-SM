@@ -1,4 +1,5 @@
 ﻿FEATURES
+Use SMX difficulty names
 Improve simfile and difficulty metadata
 
 OTHER

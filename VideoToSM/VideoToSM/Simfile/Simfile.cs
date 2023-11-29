@@ -10,28 +10,29 @@ namespace VideoToSM.Simfile
 
         public Simfile()
         {
-            Metadata.Add("VERSION", "0.83");
-            Metadata.Add("TITLE", "Broken");
-            Metadata.Add("ARTIST", "Matduke");
-            Metadata.Add("TITLETRANSLIT", "");
-            Metadata.Add("SUBTITLETRANSLIT", "");
-            Metadata.Add("ARTISTTRANSLIT", "");
-            Metadata.Add("GENRE", "House");
-            Metadata.Add("ORIGIN", "");
-            Metadata.Add("TAGS", "");
-            Metadata.Add("CREDIT", "");
-            Metadata.Add("BANNER", "broken-bn.jpg");
-            Metadata.Add("BACKGROUND", "broken-bg.jpg");
-            Metadata.Add("PREVIEWVID", "");
-            Metadata.Add("JACKET", "broken-jk.jpg");
-            Metadata.Add("CDIMAGE", "");
-            Metadata.Add("DISCIMAGE", "");
-            Metadata.Add("LYRICSPATH", "");
-            Metadata.Add("CDTITLE", "");
-            Metadata.Add("MUSIC", "broken.opus");
-            Metadata.Add("SAMPLESTART", "72.503998");
-            Metadata.Add("SAMPLELENGTH", "15.000000");
-            Metadata.Add("SELECTABLE", "YES");
+            Metadata.Add("VERSION", "1.0");
+            Metadata.Add("TITLE", "");
+            Metadata.Add("ARTIST", "");
+            //Metadata.Add("TITLETRANSLIT", "");
+            //Metadata.Add("SUBTITLETRANSLIT", "");
+            //Metadata.Add("ARTISTTRANSLIT", "");
+            Metadata.Add("GENRE", "");
+            Metadata.Add("ORIGIN", "StepManiaX");
+            Metadata.Add("TAGS", "StepManiaX");
+            Metadata.Add("CREDIT", "StepManiaX");
+            Metadata.Add("BANNER", "bn.jpg");
+            Metadata.Add("BACKGROUND", "bg.jpg");
+            //Metadata.Add("PREVIEWVID", "");
+            Metadata.Add("JACKET", "jk.jpg");
+            //Metadata.Add("CDIMAGE", "");
+            //Metadata.Add("DISCIMAGE", "");
+            //Metadata.Add("LYRICSPATH", "");
+            //Metadata.Add("CDTITLE", "");
+            Metadata.Add("MUSIC", "music.opus");
+            //Metadata.Add("SAMPLESTART", "72.503998");
+            //Metadata.Add("SAMPLELENGTH", "15.000000");
+            //Metadata.Add("SELECTABLE", "YES");
+            Metadata.Add("BPMS", "0=" + G.BPM);
         }
 
         public override string ToString()
