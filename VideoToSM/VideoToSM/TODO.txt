@@ -1,28 +1,8 @@
 ﻿BUGS
-Lit up LN detected as red shortnote
-	when LNOngoing, loosen the maxColor boundries. Extra check LN Center lighter than Left and Right
-Missed LN in video breaks LN
+Yellow notes often come with a fake red after
 
 FEATURES
 Improve simfile and difficulty metadata
-LN coords for other cols
-Other note timings
-Support triplets
-Support ReleaseNotes
-Support Mines
-	Mine check before note check so it's not detected as red shortnote
-Support VibroNotes
-Support multiple BPM
-Export to scc
-Async
-Support time signatures other than 4/4
 
 OTHER
 Download videos
-Check if OutFox even supports special notes
-Song database
-	SQLite in Mega
-	IsConverted
-	HasReleaseNotes
-	Song table one to many chart table
-	View for chart to display song info

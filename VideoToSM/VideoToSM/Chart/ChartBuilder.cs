@@ -20,11 +20,10 @@ namespace VideoToSM.Chart
         {
             int framesInPause = G.BaseOnFPS(6);
 
-            ChartCol col = Chart.Columns[colNum];
-
             Note? note = FindNote(noteColorGroup);
             if (note != null)
             {
+                ChartCol col = Chart.Columns[colNum];
                 if (col.LastAddedNote != null && note.NoteTiming == col.LastAddedNote.NoteTiming &&
                     col.LastAddedFrameNum != null && frameNum - col.LastAddedFrameNum <= framesInPause)
                     return;
@@ -32,6 +31,13 @@ namespace VideoToSM.Chart
                 Chart.AddNote(note, colNum, frameNum);
                 return;
             }
+
+            //HandleLN(noteColorGroup, colNum, frameNum);
+        }
+
+        private void HandleLN(NoteColorGroup noteColorGroup, int colNum, int frameNum)
+        {
+            ChartCol col = Chart.Columns[colNum];
 
             bool isLNOngoing = col.FirstLNFrameNum != null;
 
