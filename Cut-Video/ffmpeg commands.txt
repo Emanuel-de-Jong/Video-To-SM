@@ -1,0 +1,5 @@
+VIDEO
+ffmpeg -ss 00:00:30 -t 00:01:00 -acodec copy -vcodec copy "cut.mp4" -i "og.mp4"
+
+AUDIO
+ffmpeg -ss 00:00:30 -t 00:01:00 -acodec copy -vcodec copy "cut.webm" -i "og.webm"

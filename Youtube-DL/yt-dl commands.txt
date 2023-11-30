@@ -1,0 +1,5 @@
+WHOLE CHANNEL
+.\yt-dlp.exe -f 'bestvideo[fps=60][height=720]+bestaudio' -v -ciw --no-abort-on-error --download-archive archive.txt "https://www.youtube.com/@SMXRepository"
+
+MY PLAYLIST
+.\yt-dlp.exe -f 'bestvideo[fps=60][height=720]+bestaudio' -v -ciw --no-abort-on-error --download-archive archive.txt "https://youtube.com/playlist?list=PLiN8YjjMwxQkZ49FoyHcrGY43dX3EyOes&si=FhouWN5pIvLei-YK"
