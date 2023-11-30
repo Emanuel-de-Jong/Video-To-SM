@@ -14,11 +14,11 @@ namespace VideoToSM.Simfile
             Notes = notes;
 
             Metadata.Add("NOTEDATA", "");
-            Metadata.Add("CHARTNAME", "");
+            Metadata.Add("CHARTNAME", G.DifficultyType.Print());
             //Metadata.Add("CHARTHASH", "1364798683");
             Metadata.Add("STEPSTYPE", "smx-single");
             //Metadata.Add("BANNER", "");
-            Metadata.Add("DESCRIPTION", G.DifficultyType.Print());
+            //Metadata.Add("DESCRIPTION", "");
             //Metadata.Add("CHARTSTYLE", "");
             Metadata.Add("DIFFICULTY", G.DifficultyType.ToSM());
             Metadata.Add("METER", "1");
