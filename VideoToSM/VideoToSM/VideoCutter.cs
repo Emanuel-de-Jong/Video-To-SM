@@ -39,13 +39,15 @@ namespace VideoToSM
             outPath += outName + System.IO.Path.GetExtension(path);
 
             string command = $"ffmpeg " +
-                $"-ss {startTime.ToString("HH:mm:ss")} " +
-                $"-t {duration.ToString("HH:mm:ss")} " +
+                $"-ss {startTime.ToString("HH:mm:ss.ff")} " +
+                $"-t {duration.ToString("HH:mm:ss.ff")} " +
                 $"-acodec copy " +
                 $"-vcodec copy " +
                 $"-y " +
                 $"\"{outPath}\" " +
                 $"-i \"{path}\"";
+
+            G.MessageTextBoxHelper.WriteLine(command);
 
             ProcessStartInfo startInfo = new()
             {
