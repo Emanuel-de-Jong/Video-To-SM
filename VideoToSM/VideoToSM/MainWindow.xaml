@@ -60,10 +60,10 @@
                 <Label Grid.Column="0" Grid.Row="1" Content="Video times:" VerticalContentAlignment="Center" />
                 <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
                     <TextBox Name="VideoStartTimeTextBox" HorizontalAlignment="Left" Width="100" Height="18"
-                             FontSize="10" />
+                             FontSize="10" Text="00:00.0" />
                              <!--Text="00:12.0" />-->
                     <TextBox Name="VideoEndTimeTextBox" HorizontalAlignment="Left" Width="100" Height="18"
-                             FontSize="10" Margin="10,0,0,0" />
+                             FontSize="10" Margin="10,0,0,0" Text="01:00.0" />
                              <!--Text="01:42.0" />-->
                 </StackPanel>
 
@@ -92,10 +92,10 @@
                 <Label Grid.Column="0" Grid.Row="4" Content="Audio times:" VerticalContentAlignment="Center" />
                 <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
                     <TextBox Name="AudioStartTimeTextBox" HorizontalAlignment="Left" Width="100" Height="18"
-                             FontSize="10" />
+                             FontSize="10" Text="00:00.0" />
                              <!--Text="00:08.0" />-->
                     <TextBox Name="AudioEndTimeTextBox" HorizontalAlignment="Left" Width="100" Height="18"
-                             FontSize="10" Margin="10,0,0,0" />
+                             FontSize="10" Margin="10,0,0,0" Text="01:00.0" />
                              <!--Text="01:43.0" />-->
                 </StackPanel>
 
