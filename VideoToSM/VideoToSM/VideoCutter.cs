@@ -37,15 +37,14 @@ namespace VideoToSM
 
             string command = $"ffmpeg " +
                 $"-ss {startTime.ToString("HH:mm:ss.ff")} " +
-                $"-to {endTime.ToString("HH:mm:ss.ff")} " +
+                $"-i \"{path}\" " +
+                $"-c copy " +
+                $"-avoid_negative_ts make_zero " +
+                $"-fflags +genpts " +
                 $"-copyts " +
-                $"-c:a copy " +
-                $"-c:v copy " +
                 $"-y " +
-                $"\"{outPath}\" " +
-                $"-i \"{path}\"";
-
-            G.MessageTextBoxHelper.WriteLine(command);
+                $"-to {endTime.ToString("HH:mm:ss.ff")} " +
+                $"\"{outPath}\"";
 
             ProcessStartInfo startInfo = new()
             {
