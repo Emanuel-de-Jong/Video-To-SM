@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VideoToSM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="700" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="10" />
+            <RowDefinition Height="5" />
             <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
 
@@ -55,7 +55,7 @@
                              TextWrapping="WrapWithOverflow" FontSize="8" />
                 </Grid>
 
-                <Label Grid.Column="0" Grid.Row="1" Content="Video:" VerticalContentAlignment="Center" />
+                <Label Grid.Column="0" Grid.Row="1" Content="Audio:" VerticalContentAlignment="Center" />
                 <Grid Grid.Column="1" Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60" />
@@ -74,11 +74,11 @@
 
                 <Label Grid.Column="0" Grid.Row="2" Content="Start time:" VerticalContentAlignment="Center" />
                 <TextBox Name="StartTimeTextBox" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"
-                         Width="100" Height="18" FontSize="10" Text="01:00" />
+                         Width="100" Height="18" FontSize="10" Text="00:00" />
 
                 <Label Grid.Column="0" Grid.Row="3" Content="End time:" VerticalContentAlignment="Center" />
                 <TextBox Name="EndTimeTextBox" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left"
-                         Width="100" Height="18" FontSize="10" Text="01:30" />
+                         Width="100" Height="18" FontSize="10" Text="01:00" />
 
                 <Button Name="CutVideoButton" Grid.Column="1" Grid.Row="4" Content="Cut"
                         Height="18" FontSize="10" Width="50" HorizontalAlignment="Left"
