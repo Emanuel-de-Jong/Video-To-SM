@@ -2,10 +2,13 @@
 {
     public class SimfileGenerator
     {
-        public Simfile Simfile { get; set; } = new();
+        public Simfile? Simfile { get; set; }
 
         public void Generate()
         {
+            if (Simfile == null)
+                Simfile = new();
+
             Chart.Chart chart = G.ChartBuilder.Chart;
 
             NoteBars noteBars = new();

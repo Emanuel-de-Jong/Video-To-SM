@@ -1,7 +1,4 @@
-﻿BUGS
-SCC title empty
-
-FEATURES
+﻿FEATURES
 Improve video and audio quality
 Improve simfile and difficulty metadata
 
