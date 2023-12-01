@@ -13,6 +13,7 @@ namespace VideoToSM
 
         public static int BPM { get; set; } = 146;
         public static ESMXDifficultyType DifficultyType { get; set; } = ESMXDifficultyType.HardPlus;
+        public static string SongTitle { get; set; }
 
         public static double FPS { get; set; }
         public static int ScreenWidth { get; set; }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using VideoToSM.Enums;
@@ -49,6 +51,20 @@ namespace VideoToSM
         {
             ComboBoxItem item = (ComboBoxItem)DifficultyTypeComboBox.SelectedItem;
             G.DifficultyType = (ESMXDifficultyType)item.Content;
+        }
+
+        private void BrowseVideoButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDlg = new();
+
+            bool? result = openFileDlg.ShowDialog();
+            if (result == null || result == false)
+                return;
+
+            VideoPathTextBox.Text = Path.GetFileName(openFileDlg.FileName);
+
+            VideoCutter videoCutter = new();
+            videoCutter.Cut(openFileDlg.FileName, DateTime.Now, DateTime.Now);
         }
     }
 }

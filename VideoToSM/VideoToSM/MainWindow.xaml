@@ -5,57 +5,110 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VideoToSM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
-    <Grid Name="MainGrid">
+        Title="MainWindow" Height="600" Width="800">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
 
-        <Grid Margin="20">
+        <Grid Grid.Column="0" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Label Grid.Column="0" Grid.Row="0" Content="BPM:" VerticalContentAlignment="Center" />
-            <TextBox Name="BPMTextBox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"
+            <Grid Grid.Column="0" Grid.Row="0" Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" Content="Video:" VerticalContentAlignment="Center" />
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Button Name="BrowseVideoButton" Grid.Column="0" Grid.Row="0" Content="Browse"
+                            Height="18" FontSize="10" Width="50" HorizontalAlignment="Left"
+                            Click="BrowseVideoButton_Click" />
+                    <TextBox Name="VideoPathTextBox" Grid.Column="1" Grid.Row="0"
+                             TextWrapping="WrapWithOverflow" FontSize="8" />
+                </Grid>
+
+                <Label Grid.Column="0" Grid.Row="1" Content="Start time:" VerticalContentAlignment="Center" />
+
+                <Label Grid.Column="0" Grid.Row="2" Content="End time:" VerticalContentAlignment="Center" />
+            </Grid>
+        </Grid>
+
+        <Separator Grid.Column="0" Grid.Row="1" Background="Black" />
+
+        <Grid Grid.Column="0" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Column="0" Grid.Row="0" Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" Content="BPM:" VerticalContentAlignment="Center" />
+                <TextBox Name="BPMTextBox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"
                      Width="100" Height="18" FontSize="10" TextChanged="BPMTextBox_TextChanged" />
 
-            <Label Grid.Column="0" Grid.Row="1" Content="Difficulty:" VerticalContentAlignment="Center" />
-            <ComboBox Name="DifficultyTypeComboBox" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"
+                <Label Grid.Column="0" Grid.Row="1" Content="Difficulty:" VerticalContentAlignment="Center" />
+                <ComboBox Name="DifficultyTypeComboBox" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"
                       Width="100" Height="18" FontSize="10" SelectionChanged="DifficultyTypeComboBox_SelectionChanged" />
-            
-            <Label Grid.Column="0" Grid.Row="2" Content="Read left side:" VerticalContentAlignment="Center" />
-            <CheckBox Name="ReadLeftSideCheckBox" Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center"
-                      IsChecked="True" />
-        </Grid>
-        
-        <StackPanel Grid.Column="0" Grid.Row="0" Margin="20" HorizontalAlignment="Left">
-        </StackPanel>
 
-        <Label Grid.Column="1" Grid.Row="0" Content="Drag &amp; Drop" Margin="20"
+                <Label Grid.Column="0" Grid.Row="2" Content="Read left side:" VerticalContentAlignment="Center" />
+                <CheckBox Name="ReadLeftSideCheckBox" Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center"
+                      IsChecked="True" />
+            </Grid>
+
+            <Label Grid.Column="1" Grid.Row="0" Content="Drag &amp; Drop" Margin="20"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                AllowDrop="True" Drop="Label_Drop"
                BorderBrush="Black" BorderThickness="1" />
 
-        <StackPanel Grid.Column="0" Grid.Row="1" Margin="20">
-            <Label Content="Message:" HorizontalAlignment="Center" />
-            <RichTextBox Name="MessageRichTextBox" Height="200" />
-        </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="1" Margin="20">
+                <Label Content="Message:" HorizontalAlignment="Center" />
+                <RichTextBox Name="MessageRichTextBox" Height="200" />
+            </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="1" Margin="20">
-            <Label Content="SCC:" HorizontalAlignment="Center" />
-            <RichTextBox Name="SCCRichTextBox" Height="200" />
-        </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="1" Margin="20">
+                <Label Content="SCC:" HorizontalAlignment="Center" />
+                <RichTextBox Name="SCCRichTextBox" Height="200" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

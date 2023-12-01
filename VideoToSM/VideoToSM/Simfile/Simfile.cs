@@ -11,7 +11,7 @@ namespace VideoToSM.Simfile
         public Simfile()
         {
             Metadata.Add("VERSION", "1.0");
-            Metadata.Add("TITLE", "");
+            Metadata.Add("TITLE", G.SongTitle);
             Metadata.Add("ARTIST", "");
             //Metadata.Add("TITLETRANSLIT", "");
             //Metadata.Add("SUBTITLETRANSLIT", "");
