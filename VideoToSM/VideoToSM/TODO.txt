@@ -1,6 +1,6 @@
 ﻿FEATURES
+Improve video and audio quality
 Improve simfile and difficulty metadata
 
 OTHER
 Make release
-Download videos
