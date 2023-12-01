@@ -94,16 +94,37 @@ namespace VideoToSM
             AudioPathTextBox.Text = files[0];
         }
 
+        private void GetSongTitleFromFileName(string fileName)
+        {
+            fileName = fileName.Substring(13);
+            fileName = fileName.Substring(0, fileName.IndexOf("(") - 1);
+            G.SongTitle = fileName;
+        }
+
+        private void CutAudioButton_Click(object sender, RoutedEventArgs e)
+        {
+            GetSongTitleFromFileName(System.IO.Path.GetFileNameWithoutExtension(AudioPathTextBox.Text));
+
+            MediaCutter mediaCutter = new();
+            mediaCutter.Cut(
+                AudioPathTextBox.Text,
+                "- " + G.SongTitle,
+                DateTimeOffset.Parse("00:" + AudioStartTimeTextBox.Text),
+                DateTimeOffset.Parse("00:" + AudioEndTimeTextBox.Text),
+                false);
+        }
+
         private void CutVideoButton_Click(object sender, RoutedEventArgs e)
         {
-            VideoCutter videoCutter = new();
-            videoCutter.Cut(
+            GetSongTitleFromFileName(System.IO.Path.GetFileNameWithoutExtension(VideoPathTextBox.Text));
+
+            MediaCutter mediaCutter = new();
+            mediaCutter.Cut(
                 VideoPathTextBox.Text,
-                AudioPathTextBox.Text,
+                "- " + G.SongTitle + " [video]",
                 DateTimeOffset.Parse("00:" + VideoStartTimeTextBox.Text),
                 DateTimeOffset.Parse("00:" + VideoEndTimeTextBox.Text),
-                DateTimeOffset.Parse("00:" + AudioStartTimeTextBox.Text),
-                DateTimeOffset.Parse("00:" + AudioEndTimeTextBox.Text));
+                true);
         }
     }
 }

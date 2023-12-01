@@ -10,27 +10,9 @@ using System.Windows.Shapes;
 
 namespace VideoToSM
 {
-    public class VideoCutter
+    public class MediaCutter
     {
-        public void Cut(string videoPath, string audioPath,
-            DateTimeOffset videoStartTime, DateTimeOffset videoEndTime,
-            DateTimeOffset audioStartTime, DateTimeOffset audioEndTime)
-        {
-            FindSongTitle(System.IO.Path.GetFileNameWithoutExtension(videoPath));
-
-            string outName = "- " + G.SongTitle;
-            ExecuteFfmpeg(videoPath, outName + " [video]", videoStartTime, videoEndTime);
-            ExecuteFfmpeg(audioPath, outName, audioStartTime, audioEndTime);
-        }
-
-        private void FindSongTitle(string fileName)
-        {
-            fileName = fileName.Substring(13);
-            fileName = fileName.Substring(0, fileName.IndexOf("(") - 1);
-            G.SongTitle = fileName;
-        }
-
-        private void ExecuteFfmpeg(string path, string outName, DateTimeOffset startTime, DateTimeOffset endTime)
+        public void Cut(string path, string outName, DateTimeOffset startTime, DateTimeOffset endTime, bool isVideo)
         {
             string outPath = path.Substring(0, path.LastIndexOf('\\') + 1);
             outPath += outName + System.IO.Path.GetExtension(path);
@@ -39,12 +21,12 @@ namespace VideoToSM
                 $"-i \"{path}\" " +
                 $"-ss {startTime.ToString("HH:mm:ss.ff")} " +
                 $"-to {endTime.ToString("HH:mm:ss.ff")} " +
-                $"-c:v libx264 " +
+                (isVideo ? $"-c:v libx264 " : "") +
                 $"-x264opts " +
                 $"keyint=60:no-scenecut " +
-                $"-c:a aac " +
+                $"-c:a libvorbis " +
                 $"-strict experimental " +
-                $"-b:v 2M " +
+                (isVideo ? $"-b:v 2M " : "") +
                 $"-b:a 192k " +
                 $"-y " +
                 $"\"{outPath}\"";
