@@ -108,7 +108,7 @@ namespace VideoToSM
             MediaCutter mediaCutter = new();
             mediaCutter.Cut(
                 AudioPathTextBox.Text,
-                "- " + G.SongTitle,
+                "music",
                 DateTimeOffset.Parse("00:" + AudioStartTimeTextBox.Text),
                 DateTimeOffset.Parse("00:" + AudioEndTimeTextBox.Text),
                 false);
@@ -121,7 +121,7 @@ namespace VideoToSM
             MediaCutter mediaCutter = new();
             mediaCutter.Cut(
                 VideoPathTextBox.Text,
-                "- " + G.SongTitle + " [video]",
+                "music [video]",
                 DateTimeOffset.Parse("00:" + VideoStartTimeTextBox.Text),
                 DateTimeOffset.Parse("00:" + VideoEndTimeTextBox.Text),
                 true);

@@ -15,7 +15,8 @@ namespace VideoToSM
         public void Cut(string path, string outName, DateTimeOffset startTime, DateTimeOffset endTime, bool isVideo)
         {
             string outPath = path.Substring(0, path.LastIndexOf('\\') + 1);
-            outPath += outName + System.IO.Path.GetExtension(path);
+            outPath += outName;
+            outPath += isVideo ? System.IO.Path.GetExtension(path) : ".ogg";
 
             string command = $"ffmpeg " +
                 $"-i \"{path}\" " +
@@ -30,8 +31,6 @@ namespace VideoToSM
                 $"-b:a 192k " +
                 $"-y " +
                 $"\"{outPath}\"";
-
-            G.MessageTextBoxHelper.WriteLine(command);
 
             ProcessStartInfo startInfo = new()
             {
