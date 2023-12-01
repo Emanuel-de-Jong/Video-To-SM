@@ -18,12 +18,9 @@ namespace VideoToSM
         {
             FindSongTitle(System.IO.Path.GetFileNameWithoutExtension(videoPath));
 
-            DateTimeOffset videoDuration = DateTimeOffset.Parse("00:00:00") + (videoEndTime - videoStartTime);
-            DateTimeOffset audioDuration = DateTimeOffset.Parse("00:00:00") + (audioEndTime - audioStartTime);
-
             string outName = "- " + G.SongTitle;
-            ExecuteFfmpeg(videoPath, outName + " [video]", videoStartTime, videoDuration);
-            ExecuteFfmpeg(audioPath, outName, audioStartTime, audioDuration);
+            ExecuteFfmpeg(videoPath, outName + " [video]", videoStartTime, videoEndTime);
+            ExecuteFfmpeg(audioPath, outName, audioStartTime, audioEndTime);
         }
 
         private void FindSongTitle(string fileName)
@@ -33,16 +30,17 @@ namespace VideoToSM
             G.SongTitle = fileName;
         }
 
-        private void ExecuteFfmpeg(string path, string outName, DateTimeOffset startTime, DateTimeOffset duration)
+        private void ExecuteFfmpeg(string path, string outName, DateTimeOffset startTime, DateTimeOffset endTime)
         {
             string outPath = path.Substring(0, path.LastIndexOf('\\') + 1);
             outPath += outName + System.IO.Path.GetExtension(path);
 
             string command = $"ffmpeg " +
                 $"-ss {startTime.ToString("HH:mm:ss.ff")} " +
-                $"-t {duration.ToString("HH:mm:ss.ff")} " +
-                $"-acodec copy " +
-                $"-vcodec copy " +
+                $"-to {endTime.ToString("HH:mm:ss.ff")} " +
+                $"-copyts " +
+                $"-c:a copy " +
+                $"-c:v copy " +
                 $"-y " +
                 $"\"{outPath}\" " +
                 $"-i \"{path}\"";
