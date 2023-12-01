@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 using VideoToSM.Enums;
 
 namespace VideoToSM
@@ -37,14 +38,14 @@ namespace VideoToSM
 
         private void Label_Drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+                return;
 
-                G.ChartBuilder.Chart = new();
-                G.VideoReader.Read(files[0], ReadLeftSideCheckBox.IsChecked.Value);
-                G.SimfileGen.Generate();
-            }
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            G.ChartBuilder.Chart = new();
+            G.VideoReader.Read(files[0], ReadLeftSideCheckBox.IsChecked.Value);
+            G.SimfileGen.Generate();
         }
 
         private void DifficultyTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -61,10 +62,46 @@ namespace VideoToSM
             if (result == null || result == false)
                 return;
 
-            VideoPathTextBox.Text = Path.GetFileName(openFileDlg.FileName);
+            VideoPathTextBox.Text = openFileDlg.FileName;
+        }
 
+        private void BrowseVideoButton_Drop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+                return;
+
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            VideoPathTextBox.Text = files[0];
+        }
+
+        private void BrowseAudioButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDlg = new();
+
+            bool? result = openFileDlg.ShowDialog();
+            if (result == null || result == false)
+                return;
+
+            AudioPathTextBox.Text = openFileDlg.FileName;
+        }
+
+        private void BrowseAudioButton_Drop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+                return;
+
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            AudioPathTextBox.Text = files[0];
+        }
+
+        private void CutVideoButton_Click(object sender, RoutedEventArgs e)
+        {
             VideoCutter videoCutter = new();
-            videoCutter.Cut(openFileDlg.FileName, DateTime.Now, DateTime.Now);
+            videoCutter.Cut(
+                VideoPathTextBox.Text,
+                AudioPathTextBox.Text,
+                DateTimeOffset.Parse("00:" + StartTimeTextBox.Text),
+                DateTimeOffset.Parse("00:" + EndTimeTextBox.Text));
         }
     }
 }

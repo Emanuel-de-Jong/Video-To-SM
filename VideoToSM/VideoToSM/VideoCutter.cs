@@ -5,15 +5,17 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Shapes;
 
 namespace VideoToSM
 {
     public class VideoCutter
     {
-        public void Cut(string path, DateTime startTime, DateTime endTime)
+        public void Cut(string videoPath, string audioPath, DateTimeOffset startTime, DateTimeOffset endTime)
         {
-            string fileName = Path.GetFileNameWithoutExtension(path);
-            FindSongTitle(fileName);
+            FindSongTitle(System.IO.Path.GetFileNameWithoutExtension(videoPath));
+
+            DateTimeOffset duration = startTime + (endTime - startTime);
         }
 
         private void FindSongTitle(string fileName)
