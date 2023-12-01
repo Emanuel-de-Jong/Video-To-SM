@@ -55,8 +55,16 @@
                              TextWrapping="WrapWithOverflow" FontSize="8" />
                 </Grid>
 
-                <Label Grid.Column="0" Grid.Row="1" Content="Audio:" VerticalContentAlignment="Center" />
-                <Grid Grid.Column="1" Grid.Row="1">
+                <Label Grid.Column="0" Grid.Row="1" Content="Video times:" VerticalContentAlignment="Center" />
+                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                    <TextBox Name="VideoStartTimeTextBox" HorizontalAlignment="Left" Width="100" Height="18"
+                             FontSize="10" Text="00:00" />
+                    <TextBox Name="VideoEndTimeTextBox" HorizontalAlignment="Left" Width="100" Height="18"
+                             FontSize="10" Text="01:00" Margin="10,0,0,0" />
+                </StackPanel>
+
+                <Label Grid.Column="0" Grid.Row="2" Content="Audio:" VerticalContentAlignment="Center" />
+                <Grid Grid.Column="1" Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60" />
                         <ColumnDefinition Width="*" />
@@ -72,13 +80,13 @@
                              TextWrapping="WrapWithOverflow" FontSize="8" />
                 </Grid>
 
-                <Label Grid.Column="0" Grid.Row="2" Content="Start time:" VerticalContentAlignment="Center" />
-                <TextBox Name="StartTimeTextBox" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"
-                         Width="100" Height="18" FontSize="10" Text="00:00" />
-
-                <Label Grid.Column="0" Grid.Row="3" Content="End time:" VerticalContentAlignment="Center" />
-                <TextBox Name="EndTimeTextBox" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left"
-                         Width="100" Height="18" FontSize="10" Text="01:00" />
+                <Label Grid.Column="0" Grid.Row="3" Content="Audio times:" VerticalContentAlignment="Center" />
+                <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+                    <TextBox Name="AudioStartTimeTextBox" HorizontalAlignment="Left" Width="100" Height="18"
+                             FontSize="10" Text="00:00" />
+                    <TextBox Name="AudioEndTimeTextBox" HorizontalAlignment="Left" Width="100" Height="18"
+                             FontSize="10" Text="01:00" Margin="10,0,0,0" />
+                </StackPanel>
 
                 <Button Name="CutVideoButton" Grid.Column="1" Grid.Row="4" Content="Cut"
                         Height="18" FontSize="10" Width="50" HorizontalAlignment="Left"

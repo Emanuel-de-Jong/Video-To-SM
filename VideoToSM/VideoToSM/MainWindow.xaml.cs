@@ -100,8 +100,10 @@ namespace VideoToSM
             videoCutter.Cut(
                 VideoPathTextBox.Text,
                 AudioPathTextBox.Text,
-                DateTimeOffset.Parse("00:" + StartTimeTextBox.Text),
-                DateTimeOffset.Parse("00:" + EndTimeTextBox.Text));
+                DateTimeOffset.Parse("00:" + VideoStartTimeTextBox.Text),
+                DateTimeOffset.Parse("00:" + VideoEndTimeTextBox.Text),
+                DateTimeOffset.Parse("00:" + AudioStartTimeTextBox.Text),
+                DateTimeOffset.Parse("00:" + AudioEndTimeTextBox.Text));
         }
     }
 }

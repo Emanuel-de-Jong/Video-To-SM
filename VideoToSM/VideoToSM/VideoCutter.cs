@@ -12,15 +12,18 @@ namespace VideoToSM
 {
     public class VideoCutter
     {
-        public void Cut(string videoPath, string audioPath, DateTimeOffset startTime, DateTimeOffset endTime)
+        public void Cut(string videoPath, string audioPath,
+            DateTimeOffset videoStartTime, DateTimeOffset videoEndTime,
+            DateTimeOffset audioStartTime, DateTimeOffset audioEndTime)
         {
             FindSongTitle(System.IO.Path.GetFileNameWithoutExtension(videoPath));
 
-            DateTimeOffset duration = DateTimeOffset.Parse("00:00:00") + (endTime - startTime);
+            DateTimeOffset videoDuration = DateTimeOffset.Parse("00:00:00") + (videoEndTime - videoStartTime);
+            DateTimeOffset audioDuration = DateTimeOffset.Parse("00:00:00") + (audioEndTime - audioStartTime);
 
             string outName = "- " + G.SongTitle;
-            ExecuteFfmpeg(videoPath, outName + " [video]", startTime, duration);
-            ExecuteFfmpeg(audioPath, outName, startTime.AddSeconds(-4), duration);
+            ExecuteFfmpeg(videoPath, outName + " [video]", videoStartTime, videoDuration);
+            ExecuteFfmpeg(audioPath, outName, audioStartTime, audioDuration);
         }
 
         private void FindSongTitle(string fileName)
@@ -40,6 +43,7 @@ namespace VideoToSM
                 $"-t {duration.ToString("HH:mm:ss")} " +
                 $"-acodec copy " +
                 $"-vcodec copy " +
+                $"-y " +
                 $"\"{outPath}\" " +
                 $"-i \"{path}\"";
 
