@@ -4,7 +4,7 @@
     {
         public LongNoteEnd()
         {
-            Id = 3;
+            Id = "3";
         }
     }
 }

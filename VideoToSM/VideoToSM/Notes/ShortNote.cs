@@ -4,7 +4,7 @@
     {
         public ShortNote()
         {
-            Id = 1;
+            Id = "1";
 
             FrameOffsetByColNum.Add(G.BaseOnFPS(2));
             FrameOffsetByColNum.Add(G.BaseOnFPS(2));

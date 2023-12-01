@@ -4,22 +4,22 @@ using System.Text;
 
 namespace VideoToSM.Simfile
 {
-    public class NoteRow : List<int>
+    public class NoteRow : List<string>
     {
-        public bool IsEmpty => !this.Where(n => n != 0).Any();
+        public bool IsEmpty => !this.Where(n => n != "0").Any();
 
         public NoteRow()
         {
             for (int note = 0; note < G.KEYS; note++)
             {
-                Add(0);
+                Add("0");
             }
         }
 
         public override string ToString()
         {
             StringBuilder output = new();
-            foreach (int note in this)
+            foreach (string note in this)
             {
                 output.Append(note);
             }
