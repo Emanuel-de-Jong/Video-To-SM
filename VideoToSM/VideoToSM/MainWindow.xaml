@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VideoToSM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="800">
+        Title="MainWindow" Height="750" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -37,10 +37,15 @@
                     <RowDefinition Height="25" />
                     <RowDefinition Height="25" />
                     <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
                 </Grid.RowDefinitions>
 
-                <Label Grid.Column="0" Grid.Row="0" Content="Video:" VerticalContentAlignment="Center" />
-                <Grid Grid.Column="1" Grid.Row="0">
+                <Label Grid.Column="0" Grid.Row="0" Content="Name:" VerticalContentAlignment="Center" />
+                <TextBox Grid.Column="1" Grid.Row="0" Name="NameTextBox" HorizontalAlignment="Left" Width="150" Height="18" FontSize="10" />
+
+                <Label Grid.Column="0" Grid.Row="1" Content="Video:" VerticalContentAlignment="Center" />
+                <Grid Grid.Column="1" Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60" />
                         <ColumnDefinition Width="*" />
@@ -57,8 +62,8 @@
                              <!--Text="E:\Media\Downloads\test\[StepManiaX]  Emea (HARD+⧸WILD) [BQTPMLRe7fk].f298.mp4" />-->
                 </Grid>
 
-                <Label Grid.Column="0" Grid.Row="1" Content="Video times:" VerticalContentAlignment="Center" />
-                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                <Label Grid.Column="0" Grid.Row="2" Content="Video times:" VerticalContentAlignment="Center" />
+                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
                     <TextBox Name="VideoStartTimeTextBox" HorizontalAlignment="Left" Width="100" Height="18"
                              FontSize="10" Text="00:00.0" />
                              <!--Text="00:12.0" />-->
@@ -67,12 +72,12 @@
                              <!--Text="01:42.0" />-->
                 </StackPanel>
 
-                <Button Name="CutVideoButton" Grid.Column="1" Grid.Row="2" Content="Cut"
+                <Button Name="CutVideoButton" Grid.Column="1" Grid.Row="3" Content="Cut"
                         Height="18" FontSize="10" Width="50" HorizontalAlignment="Left"
                         Click="CutVideoButton_Click" />
 
-                <Label Grid.Column="0" Grid.Row="3" Content="Audio:" VerticalContentAlignment="Center" />
-                <Grid Grid.Column="1" Grid.Row="3">
+                <Label Grid.Column="0" Grid.Row="4" Content="Audio:" VerticalContentAlignment="Center" />
+                <Grid Grid.Column="1" Grid.Row="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60" />
                         <ColumnDefinition Width="*" />
@@ -89,8 +94,8 @@
                              <!--Text="E:\Media\Downloads\test\[StepManiaX]  Emea (HARD+⧸WILD) [BQTPMLRe7fk].f251.webm" />-->
                 </Grid>
 
-                <Label Grid.Column="0" Grid.Row="4" Content="Audio times:" VerticalContentAlignment="Center" />
-                <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
+                <Label Grid.Column="0" Grid.Row="5" Content="Audio times:" VerticalContentAlignment="Center" />
+                <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
                     <TextBox Name="AudioStartTimeTextBox" HorizontalAlignment="Left" Width="100" Height="18"
                              FontSize="10" Text="00:00.0" />
                              <!--Text="00:08.0" />-->
@@ -99,7 +104,7 @@
                              <!--Text="01:43.0" />-->
                 </StackPanel>
 
-                <Button Name="CutAudioButton" Grid.Column="1" Grid.Row="5" Content="Cut"
+                <Button Name="CutAudioButton" Grid.Column="1" Grid.Row="6" Content="Cut"
                         Height="18" FontSize="10" Width="50" HorizontalAlignment="Left"
                         Click="CutAudioButton_Click" />
             </Grid>

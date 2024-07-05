@@ -94,16 +94,20 @@ namespace VideoToSM
             AudioPathTextBox.Text = files[0];
         }
 
-        private void GetSongTitleFromFileName(string fileName)
+        private string GetSongTitleFromFileName(string fileName)
         {
             fileName = fileName.Substring(13);
             fileName = fileName.Substring(0, fileName.IndexOf("(") - 1);
-            G.SongTitle = fileName;
+            return fileName;
         }
 
         private void CutAudioButton_Click(object sender, RoutedEventArgs e)
         {
-            GetSongTitleFromFileName(System.IO.Path.GetFileNameWithoutExtension(AudioPathTextBox.Text));
+            G.SongTitle = NameTextBox.Text;
+            if (string.IsNullOrWhiteSpace(G.SongTitle))
+            {
+                G.SongTitle = GetSongTitleFromFileName(System.IO.Path.GetFileNameWithoutExtension(AudioPathTextBox.Text));
+            }
 
             MediaCutter mediaCutter = new();
             mediaCutter.Cut(
@@ -116,7 +120,11 @@ namespace VideoToSM
 
         private void CutVideoButton_Click(object sender, RoutedEventArgs e)
         {
-            GetSongTitleFromFileName(System.IO.Path.GetFileNameWithoutExtension(VideoPathTextBox.Text));
+            G.SongTitle = NameTextBox.Text;
+            if (string.IsNullOrWhiteSpace(G.SongTitle))
+            {
+                G.SongTitle = GetSongTitleFromFileName(System.IO.Path.GetFileNameWithoutExtension(VideoPathTextBox.Text));
+            }
 
             MediaCutter mediaCutter = new();
             mediaCutter.Cut(
